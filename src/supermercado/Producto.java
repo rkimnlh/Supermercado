@@ -8,15 +8,17 @@ public abstract class Producto {
     protected String categoria;
     protected int id;
     protected int stock;
+    protected int cantidad;
 
     // Constructor
-    public Producto (double precioBase, String nombre, String marca, String categoria, int id, int stock) {
+    public Producto (double precioBase, String nombre, String marca, String categoria, int id, int stock, int cantidad) {
         this.precioBase = precioBase;
         this.nombre = nombre;
         this.marca = marca;
         this.categoria = categoria;
         this.id = id;
         this.stock = stock;
+        this.cantidad = cantidad;
     }
     
     // Constructor vacío
@@ -33,6 +35,7 @@ public abstract class Producto {
                 ", categoria='" + categoria + '\'' +
                 ", id=" + id +
                 ", stock=" + stock +
+                ", cantidad=" + cantidad +
                 '}';
     }
 
