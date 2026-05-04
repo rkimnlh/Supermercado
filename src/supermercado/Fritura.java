@@ -1,0 +1,41 @@
+package supermercado;
+
+public class Fritura extends Producto {
+    protected String tipoFritura; 
+    protected String sabor; 
+    protected double contenidoGramos; 
+    //constructores
+
+    public Fritura(String tipoFritura, String sabor, double contenidoGramos, double precioBase, String nombre, String marca, String categoria, int id, int stock) {
+        super(precioBase, nombre, marca, categoria, id, stock);
+        this.tipoFritura = tipoFritura;
+        this.sabor = sabor;
+        this.contenidoGramos = contenidoGramos;
+    }
+
+    public Fritura(String tipoFritura, String sabor, double contenidoGramos) {
+        this.tipoFritura = tipoFritura;
+        this.sabor = sabor;
+        this.contenidoGramos = contenidoGramos;
+    }
+    
+    public Fritura(){
+        
+    }
+    
+    @Override 
+    public double calcularPrecioFinal(){
+        double iva = this.precioBase * 0.16; 
+        double ieps = this.precioBase * 0.8; 
+        
+        return this.precioBase + iva + ieps; 
+    }
+    
+   
+
+    @Override
+    public String toString() {
+        return "Fritura{" + "tipoFritura=" + tipoFritura + ", sabor=" + sabor + ", contenidoGramos=" + contenidoGramos + '}';
+    }
+    
+}
