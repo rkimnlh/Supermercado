@@ -1,13 +1,15 @@
 package supermercado;
 
 
-public class Lacteo extends Producto {
+import java.time.LocalDate;
+
+public class Lacteo extends Producto implements Promocionable{
     private String tipoLeche;
-    private String fechaCaducidad;
+    private LocalDate fechaCaducidad;
 
     // Constructor
     public Lacteo(double precioBase, String nombre, String marca, String categoria, int id, int stock,
-                  int cantidad, String tipoLeche, String fechaCaducidad) {
+                  int cantidad, String tipoLeche, LocalDate fechaCaducidad) {
         super(precioBase, nombre, marca, categoria, id, stock, cantidad);
         this.tipoLeche = tipoLeche;
         this.fechaCaducidad = fechaCaducidad;
@@ -19,9 +21,21 @@ public class Lacteo extends Producto {
     }
 
     // Constructor de Lacteo
-    public Lacteo (String tipoLeche, String fechaCaducidad) {
+    public Lacteo (String tipoLeche, LocalDate fechaCaducidad) {
         this.tipoLeche = tipoLeche;
         this.fechaCaducidad = fechaCaducidad;
+    }
+
+    @Override
+    public double aplicarDescuento(double porcentaje) {
+        return 0;
+    }
+
+    @Override
+    public boolean estaVencido() {
+        // Compara la fecha de caducidad con la fecha de hoy
+        return LocalDate.now().isAfter(fechaCaducidad);
+        // LocalDate.of(2023, 12, 31)
     }
 
 
@@ -35,7 +49,7 @@ public class Lacteo extends Producto {
     public String toString() {
         return super.toString() + " -> Lacteo{" +
                 "tipoLeche='" + tipoLeche + '\'' +
-                ", fechaCaducidad='" + fechaCaducidad + '\'' +
+                ", Caduca: " + fechaCaducidad + (estaVencido() ? " (VENCIDO)" : " (Vigente)") + '\'' +
                 '}';
     }
 }

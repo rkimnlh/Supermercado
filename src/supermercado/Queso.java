@@ -1,6 +1,8 @@
 
 package supermercado;
 
+import java.time.LocalDate;
+
 public class Queso extends Lacteo {
     private String tipoQueso;
     private double pesoKg;
@@ -8,7 +10,7 @@ public class Queso extends Lacteo {
 
     // Constructor
     public Queso(double precioBase, String nombre, String marca, String categoria, int id, int stock,
-                 int cantidad, String tipoLeche, String fechaCaducidad,
+                 int cantidad, String tipoLeche, LocalDate fechaCaducidad,
                  String tipoQueso, double pesoKg, boolean esImportado) {
         super(precioBase, nombre, marca, categoria, id, stock, cantidad, tipoLeche, fechaCaducidad);
         this.tipoQueso = tipoQueso;
@@ -30,7 +32,7 @@ public class Queso extends Lacteo {
 
     @Override
     public double calcularPrecioFinal() {
-        
+        // Obtenemos el precio que calcula Lacteo (que ya trae un +10% de refrigeración)
         double precioConLacteo = super.calcularPrecioFinal();
 
         // Si es importado (true), aplicamos un 10% adicional de comisión
