@@ -4,15 +4,13 @@ package supermercado;
 public class Lacteo extends Producto {
     private String tipoLeche;
     private String fechaCaducidad;
-    private double contenidoLitros;
 
     // Constructor
     public Lacteo(double precioBase, String nombre, String marca, String categoria, int id, int stock,
-                  int cantidad, String tipoLeche, String fechaCaducidad, double contenidoLitros) {
+                  int cantidad, String tipoLeche, String fechaCaducidad) {
         super(precioBase, nombre, marca, categoria, id, stock, cantidad);
         this.tipoLeche = tipoLeche;
         this.fechaCaducidad = fechaCaducidad;
-        this.contenidoLitros = contenidoLitros;
     }
 
     // Constructor vacio
@@ -21,10 +19,9 @@ public class Lacteo extends Producto {
     }
 
     // Constructor de Lacteo
-    public Lacteo (String tipoLeche, String fechaCaducidad, double contenidoLitros) {
+    public Lacteo (String tipoLeche, String fechaCaducidad) {
         this.tipoLeche = tipoLeche;
         this.fechaCaducidad = fechaCaducidad;
-        this.contenidoLitros = contenidoLitros;
     }
 
 
@@ -39,7 +36,6 @@ public class Lacteo extends Producto {
         return super.toString() + " -> Lacteo{" +
                 "tipoLeche='" + tipoLeche + '\'' +
                 ", fechaCaducidad='" + fechaCaducidad + '\'' +
-                ", contenidoLitros=" + contenidoLitros +
                 '}';
     }
 }
