@@ -35,6 +35,7 @@ public abstract class Producto {
                 ", categoria='" + categoria + '\'' +
                 ", id=" + id +
                 ", stock=" + stock +
+                ", cantidad=" + cantidad +
                 '}';
     }
 
