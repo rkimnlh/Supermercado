@@ -20,6 +20,7 @@ public class Cereal extends Producto{
     
     @Override
     public double calcularPrecioFinal(){
-        return precioBase * cantidad;
+        double ieps = this.precioBase * 0.8; 
+        return precioBase + ieps;
     }
 }

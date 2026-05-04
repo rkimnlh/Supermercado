@@ -42,7 +42,7 @@ public class Lacteo extends Producto implements Promocionable{
     // Cálculo de precio con un 10% de impuesto por cadena de frío
     @Override
     public double calcularPrecioFinal() {
-        return this.precioBase * 0.10;
+        return this.precioBase + (this.precioBase * 0.10);
     }
 
     @Override
