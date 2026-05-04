@@ -24,11 +24,10 @@ public class Fritura extends Producto {
     }
     
     @Override 
-    public double calcularPrecioFinal(){
-        double iva = this.precioBase * 0.16; 
+    public double calcularPrecioFinal(){ 
         double ieps = this.precioBase * 0.8; 
         
-        return this.precioBase + iva + ieps; 
+        return this.precioBase + ieps; 
     }
     
    
