@@ -6,8 +6,8 @@ public class Fritura extends Producto {
     protected double contenidoGramos; 
     //constructores
 
-    public Fritura(String tipoFritura, String sabor, double contenidoGramos, double precioBase, String nombre, String marca, String categoria, int id, int stock) {
-        super(precioBase, nombre, marca, categoria, id, stock);
+    public Fritura(String tipoFritura, String sabor, double contenidoGramos, double precioBase, String nombre, String marca, String categoria, int id, int stock, int cantidad) {
+        super(precioBase, nombre, marca, categoria, id, stock, cantidad);
         this.tipoFritura = tipoFritura;
         this.sabor = sabor;
         this.contenidoGramos = contenidoGramos;
