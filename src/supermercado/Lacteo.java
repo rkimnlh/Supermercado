@@ -31,12 +31,7 @@ public class Lacteo extends Producto implements Promocionable{
         return 0;
     }
 
-    @Override
-    public boolean estaVencido() {
-        // Compara la fecha de caducidad con la fecha de hoy
-        return LocalDate.now().isAfter(fechaCaducidad);
-        // LocalDate.of(2023, 12, 31)
-    }
+    
 
 
     // Cálculo de precio con un 10% de impuesto por cadena de frío
@@ -49,7 +44,7 @@ public class Lacteo extends Producto implements Promocionable{
     public String toString() {
         return super.toString() + " -> Lacteo{" +
                 "tipoLeche='" + tipoLeche + '\'' +
-                ", Caduca: " + fechaCaducidad + (estaVencido() ? " (VENCIDO)" : " (Vigente)") + '\'' +
+                ", Caduca: " + fechaCaducidad + '\'' +
                 '}';
     }
 }

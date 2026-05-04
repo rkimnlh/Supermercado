@@ -37,7 +37,7 @@ public class Queso extends Lacteo {
 
         // Si es importado (true), aplicamos un 10% adicional de comisión
         if (this.esImportado) {
-            return precioConLacteo * 0.10;
+            return precioConLacteo * 1.10;
         }
 
         return precioConLacteo;
