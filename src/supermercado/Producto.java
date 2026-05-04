@@ -18,6 +18,11 @@ public abstract class Producto {
         this.id = id;
         this.stock = stock;
     }
+    
+    // Constructor vacío
+    public Producto () {
+        
+    }
 
     @Override
     public String toString() {
