@@ -1,5 +1,5 @@
 package supermercado;
-public interface Promocionable {
+public interface Mensaje {
     public String mostrarDetalle(); 
     
 }

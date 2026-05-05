@@ -1,6 +1,6 @@
 package supermercado;
 
-public class Cereal extends Producto implements Promocionable{
+public class Cereal extends Producto implements Mensaje{
     private double contenidoGramos;
     private String tipo;
     

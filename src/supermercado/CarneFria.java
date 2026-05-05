@@ -1,6 +1,6 @@
 package supermercado;
 
-public class  CarneFria extends Producto implements Promocionable{
+public class  CarneFria extends Producto implements Mensaje{
     protected double pesoKg;
     protected String tipoCarne;
     

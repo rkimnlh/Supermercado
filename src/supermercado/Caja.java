@@ -24,7 +24,7 @@ public class Caja {
 
             try {
                 // Intentamos el cast
-                Promocionable promo = (Promocionable) item;
+                Mensaje promo = (Mensaje) item;
 
                 // USAMOS EL RETURN AQUÍ
                 mensajePromo = promo.mostrarDetalle();
