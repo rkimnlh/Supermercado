@@ -1,6 +1,6 @@
 package supermercado;
 
-public class  CarneFria extends Producto {
+public class  CarneFria extends Producto implements Promocionable{
     protected double pesoKg;
     protected String tipoCarne;
     
@@ -26,9 +26,19 @@ public class  CarneFria extends Producto {
         return precioBase + ieps;
     }
     
+    
+    
     @Override
     public String toString() {
         return super.toString()+"Carne Fria{" + "pesoKg=" + pesoKg + ", tipoCarne=" + tipoCarne + '}';
+    }
+    
+    @Override
+    public double aplicarDescuento() {
+        if (this.cantidad > 5)
+            return this.precioBase *0.5; 
+        else 
+            return 0.0; 
     }
     
 }
