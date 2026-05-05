@@ -39,6 +39,6 @@ public class Fritura extends Producto implements Promocionable{
     
     @Override
     public String mostrarDetalle() {
-        return "Coma saludable";
+        return ">>> Coma saludable.";
     }
 }

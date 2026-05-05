@@ -31,7 +31,7 @@ public class Cereal extends Producto implements Promocionable{
     
     @Override
     public String mostrarDetalle() {
-       return "Mantengase cerrado";
+       return ">>> Mantenga cerrado el paquete.";
     }
     
 }

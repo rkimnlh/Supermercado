@@ -36,7 +36,7 @@ public class  CarneFria extends Producto implements Promocionable{
     
     @Override
     public String mostrarDetalle() {
-        return "Mantengase en refrigeración";
+        return ">>> Mantengase en refrigeracion.";
     }
     
 }

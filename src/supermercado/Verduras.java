@@ -33,7 +33,7 @@ public class Verduras extends Producto implements Promocionable{
     
     @Override
     public String mostrarDetalle() {
-        return "Coloquese en refrigeracion"; 
+        return ">>> Mantenga a temperatura ambiente."; 
     }
 
     

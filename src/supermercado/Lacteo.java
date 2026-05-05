@@ -28,7 +28,7 @@ public class Lacteo extends Producto implements Promocionable{
 
     @Override
     public String mostrarDetalle() {
-        return ">>> PRODUCTO PERECEDERO: Manténgase en refrigeración.";
+        return ">>> Mantengase en refrigeracion.";
     }
     
 
