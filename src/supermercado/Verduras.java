@@ -21,7 +21,7 @@ public class Verduras extends Producto{
     @Override
     public double calcularPrecioFinal() {
         //incremento por desperdicio
-        double precioVerdura = this.precioBase*.4;
+        double precioVerdura =  this.precioBase*1.4;
         return precioVerdura;
     }
 
