@@ -4,7 +4,7 @@ import java.time.LocalDate;
 public class SuperMercado {
     public static void main(String[] args) {
         
-        CarneFria carne1 = new CarneFria(240, "Carne molida de cerdo", "La Canasta", "Carnes Frias", 033, 50, 1, .5, "Cerdo"); 
+        CarneFria carne1 = new CarneFria(240, "Carne molida", "La Canasta", "Carnes Frias", 033, 50, 1, .5, "Cerdo"); 
         Cereal cereal1 = new Cereal(25,"Cereal natural", "Kelloggs","Cereal",011,23,4,150, "Chocolate");
         Fritura fritura1= new Fritura("Doritos", "Pizza", 350.0, 20.50, "Doritos Pizza", "Sabritas", "Frituras", 044, 80, 15); 
         Lacteo leche1 = new Lacteo(17.20,"Leche", "Lala", "Leche", 022,54,1, "Entera", LocalDate.of(2023, 12, 31));
@@ -18,8 +18,6 @@ public class SuperMercado {
         cajaRegistradora.agregarProducto(fritura1);
         cajaRegistradora.agregarProducto(queso1);
         cajaRegistradora.agregarProducto(verdura);
-        
-         
         System.out.println(cajaRegistradora);
     }
     
