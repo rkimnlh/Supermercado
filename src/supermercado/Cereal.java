@@ -1,6 +1,6 @@
 package supermercado;
 
-public class Cereal extends Producto{
+public class Cereal extends Producto implements Promocionable{
     private double contenidoGramos;
     private String tipo;
     
@@ -29,5 +29,12 @@ public class Cereal extends Producto{
         return super.toString()+"Cereal{" + "contenidoGramos=" + contenidoGramos + ", tipo=" + tipo + '}';
     }
     
+    @Override
+    public double aplicarDescuento() {
+        if (this.cantidad > 3)
+            return this.precioBase *0.5; 
+        else 
+            return 0.0; 
+    }
     
 }

@@ -27,8 +27,11 @@ public class Lacteo extends Producto implements Promocionable{
     }
 
     @Override
-    public double aplicarDescuento(double porcentaje) {
-        return 0;
+    public double aplicarDescuento() {
+        if (this.cantidad > 5)
+            return this.precioBase *0.5; 
+        else 
+            return 0.0; 
     }
 
     
@@ -46,5 +49,5 @@ public class Lacteo extends Producto implements Promocionable{
                 "tipoLeche='" + tipoLeche + '\'' +
                 ", Caduca: " + fechaCaducidad + '\'' +
                 '}';
-    }
+    }      
 }

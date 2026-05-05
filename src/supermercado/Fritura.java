@@ -1,6 +1,6 @@
 package supermercado;
 
-public class Fritura extends Producto {
+public class Fritura extends Producto implements Promocionable{
     protected String tipoFritura; 
     protected String sabor; 
     protected double contenidoGramos; 
@@ -37,4 +37,11 @@ public class Fritura extends Producto {
         return  super.toString()+"Fritura{" + "tipoFritura=" + tipoFritura + ", sabor=" + sabor + ", contenidoGramos=" + contenidoGramos + '}';
     }
     
+    @Override
+    public double aplicarDescuento() {
+        if (this.cantidad > 15)
+            return this.precioBase *0.5; 
+        else 
+            return 0.0; 
+    }
 }

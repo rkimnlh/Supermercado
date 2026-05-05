@@ -1,6 +1,6 @@
 package supermercado;
 // @author susiy
-public class Verduras extends Producto{
+public class Verduras extends Producto implements Promocionable{
     //Atributos
     private double pesoKg;
     
@@ -28,6 +28,14 @@ public class Verduras extends Producto{
     @Override
     public String toString() {
         return super.toString()+ "Verduras{" + "pesoKg=" + pesoKg + '}';
+    }
+    
+    @Override
+    public double aplicarDescuento() {
+        if (this.cantidad > 10)
+            return this.precioBase *0.5; 
+        else 
+            return 0.0; 
     }
 
     
