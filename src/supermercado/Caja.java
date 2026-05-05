@@ -15,34 +15,6 @@ public class Caja {
         this.carrito.add(p);
     }
 
-    @Override
-    public String toString() {
-        // 1. Calculamos y obtenemos el texto de los productos
-        String listaProductos = obtenerListaYCalcular();
-
-        // 2. El String.format con el diseño del ticket
-        return String.format("""
-            ============================================
-                            TIENDA
-            ============================================
-            %-6s %-15s %-10s %-10s
-            --------------------------------------------
-            %s
-            --------------------------------------------
-            %32s %10.2f
-            %32s %10.2f
-                                            ------------
-            %32s $ %9.2f
-            ============================================
-            """, 
-            "CANT", "PRODUCTO", "PRECIO", "TOTAL", 
-            listaProductos, 
-            "SUBTOTAL:", this.subtotal, 
-            "IVA (16%):", this.iva, 
-            "TOTAL:", this.total
-        );
-    }
-
     private String obtenerListaYCalcular() {
         String acumulador = ""; // Usamos un String simple en lugar de StringBuilder
         this.subtotal = 0.0; 
@@ -68,4 +40,30 @@ public class Caja {
 
         return acumulador;
     }
+    
+    @Override
+    public String toString() {
+        // 1. Calculamos y obtenemos el texto de los productos
+        String listaProductos = obtenerListaYCalcular();
+
+        // 2. El String.format con el diseño del ticket
+        return String.format("""
+            ============================================
+                            TIENDA
+            ============================================
+            CANT   PRODUCTO        PRECIO     TOTAL
+            --------------------------------------------
+            %s
+            --------------------------------------------
+                                  SUBTOTAL:      %.2f
+                                 IVA (16%%):      %.2f
+                                            ------------
+                                     TOTAL: $    %.2f
+            ============================================
+            """, 
+            listaProductos, this.subtotal, this.iva, this.total
+        );
+    }
+
+
 }
