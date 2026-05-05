@@ -20,48 +20,36 @@ public class Caja {
         this.subtotal = 0.0; 
 
         for (Producto item : carrito) {
-            // 1. Por defecto, asumimos que no hay descuento (0.0)
-            double descuentoUnitario = 0.0;
+            String mensajePromo = ""; // Variable para guardar el return
 
-            // 2. Preguntamos SI este 'item' en específico implementa tu interfaz.
-            // OJO: Cambia la palabra "Descontable" por el nombre exacto que le pusiste a tu interfaz
-            if (item instanceof Promocionable) {
+            try {
+                // Intentamos el cast
+                Promocionable promo = (Promocionable) item;
 
-                // 3. Si sí la implementa, "transformamos" temporalmente el item a esa interfaz
-                // para que Java nos deje usar el método aplicarDescuento()
-                Promocionable itemConDescuento = (Promocionable) item;
-                descuentoUnitario = itemConDescuento.aplicarDescuento();
+                // USAMOS EL RETURN AQUÍ
+                mensajePromo = promo.mostrarDetalle();
+
+            } catch (ClassCastException e) {
+                // Si no es promocionable, el mensaje se queda vacío ""
             }
-            double totalItemSinDescuento = item.getCantidad() * item.getPrecioBase();
-            // Continuamos con el cálculo que ya tenías
-            double totalDescuento = descuentoUnitario * item.getCantidad();
-            
-            // 3. Calculamos el total real a pagar y lo sumamos a la caja
-            double totalItemFinal = totalItemSinDescuento - totalDescuento;
-            this.subtotal += totalItemFinal;
 
-            // 4. Imprimimos la línea normal del producto (como en la imagen original)
-            acumulador += String.format("%-6d %-15.15s %-10.2f %-10.2f\n",
-                    item.getCantidad(),
-                    item.getNombre().toUpperCase(),
-                    item.getPrecioBase(),
-                    totalItemSinDescuento);
-
-            // 5. Si hubo descuento, agregamos la línea extra tipo ticket
-            if (descuentoUnitario > 0) {
-                // Formateamos el descuento con un signo negativo
-                String textoDescuento = String.format("-%.2f", totalDescuento);
-                
-                // Dejamos el espacio de "CANT" vacío, ponemos el nombre del descuento,
-                // dejamos "PRECIO" vacío y alineamos el descuento en la columna "TOTAL"
-                acumulador += String.format("%-6s %-15.15s %-10s %-10s\n",
-                        "", "DESC VOLUMEN", "", textoDescuento);
-            }
+                    // Al calcular el precio final, el polimorfismo sigue funcionando
             double precioFinal = item.calcularPrecioFinal();
+            double totalItem = item.getCantidad() * precioFinal;
+            this.subtotal += totalItem;
+
+            // Agregamos el mensaje al acumulador si es que existe
+            acumulador += String.format("%-6d %-15.15s %-10.2f %-10.2f\n",
+                    item.getCantidad(), item.getNombre().toUpperCase(), precioFinal, totalItem);
+
+            if (!mensajePromo.equals("")) {
+                acumulador += "       " + mensajePromo + "\n"; // Se imprime debajo del producto
+            }
+        }
             
 
             
-        }
+        
 
         // Calculamos el resto de los valores
         this.iva = this.subtotal * 0.16;

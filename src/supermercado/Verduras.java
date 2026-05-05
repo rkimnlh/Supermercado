@@ -31,11 +31,8 @@ public class Verduras extends Producto implements Promocionable{
     }
     
     @Override
-    public double aplicarDescuento() {
-        if (this.cantidad > 10)
-            return this.precioBase *0.05; 
-        else 
-            return 0.0; 
+    public String mostrarDetalle() {
+        return "Coloquese en refrigeracion"; 
     }
 
     
