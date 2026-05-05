@@ -40,7 +40,7 @@ public class Fritura extends Producto implements Promocionable{
     @Override
     public double aplicarDescuento() {
         if (this.cantidad > 15)
-            return this.precioBase *0.5; 
+            return this.precioBase *0.05; 
         else 
             return 0.0; 
     }
