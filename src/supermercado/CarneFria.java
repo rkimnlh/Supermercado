@@ -22,8 +22,9 @@ public class  CarneFria extends Producto implements Promocionable{
     
     @Override
     public double calcularPrecioFinal(){
-        double ieps = this.precioBase * 0.8; 
-        return precioBase + ieps;
+        double ieps=pesoKg*this.precioBase;
+        ieps *= 1.8; 
+        return ieps;
     }
     
     

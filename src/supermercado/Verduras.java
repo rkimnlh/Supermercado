@@ -20,8 +20,9 @@ public class Verduras extends Producto implements Promocionable{
 
     @Override
     public double calcularPrecioFinal() {
+        double precioVerdura= pesoKg*this.precioBase;
         //incremento por desperdicio
-        double precioVerdura =  this.precioBase*1.4;
+         precioVerdura *=1.4;
         return precioVerdura;
     }
 
