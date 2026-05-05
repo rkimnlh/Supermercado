@@ -3,7 +3,7 @@ package supermercado;
 
 import java.time.LocalDate;
 
-public class Lacteo extends Producto implements Promocionable{
+public class Lacteo extends Producto implements Mensaje{
     private String tipoLeche;
     private LocalDate fechaCaducidad;
 

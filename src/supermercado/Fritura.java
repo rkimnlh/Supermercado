@@ -1,6 +1,6 @@
 package supermercado;
 
-public class Fritura extends Producto implements Promocionable{
+public class Fritura extends Producto implements Mensaje{
     protected String tipoFritura; 
     protected String sabor; 
     protected double contenidoGramos; 

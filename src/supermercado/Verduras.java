@@ -1,6 +1,6 @@
 package supermercado;
 // @author susiy
-public class Verduras extends Producto implements Promocionable{
+public class Verduras extends Producto implements Mensaje{
     //Atributos
     private double pesoKg;
     
