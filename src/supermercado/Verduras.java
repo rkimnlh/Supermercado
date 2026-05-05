@@ -27,6 +27,8 @@ public class Verduras extends Producto{
 
     @Override
     public String toString() {
-        return String.format("Verduras {peso: %f kg, precio: %.2f}", pesoKg,calcularPrecioFinal());
+        return super.toString()+ "Verduras{" + "pesoKg=" + pesoKg + '}';
     }
+
+    
 }

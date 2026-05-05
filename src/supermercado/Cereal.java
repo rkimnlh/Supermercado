@@ -23,4 +23,11 @@ public class Cereal extends Producto{
         double ieps = this.precioBase * 0.8; 
         return precioBase + ieps;
     }
+
+    @Override
+    public String toString() {
+        return super.toString()+"Cereal{" + "contenidoGramos=" + contenidoGramos + ", tipo=" + tipo + '}';
+    }
+    
+    
 }

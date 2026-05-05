@@ -34,7 +34,7 @@ public class Fritura extends Producto {
 
     @Override
     public String toString() {
-        return "Fritura{" + "tipoFritura=" + tipoFritura + ", sabor=" + sabor + ", contenidoGramos=" + contenidoGramos + '}';
+        return  super.toString()+"Fritura{" + "tipoFritura=" + tipoFritura + ", sabor=" + sabor + ", contenidoGramos=" + contenidoGramos + '}';
     }
     
 }
