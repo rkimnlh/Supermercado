@@ -1,6 +1,4 @@
-
 package supermercado;
-
 public abstract class Producto {
     protected double precioBase;
     protected String nombre;
@@ -9,6 +7,11 @@ public abstract class Producto {
     protected int id;
     protected int stock;
     protected int cantidad;
+    
+    // Constructor vacío
+    public Producto () {
+        
+    }
 
     // Constructor
     public Producto (double precioBase, String nombre, String marca, String categoria, int id, int stock, int cantidad) {
@@ -21,11 +24,6 @@ public abstract class Producto {
         this.cantidad = cantidad;
     }
     
-    // Constructor vacío
-    public Producto () {
-        
-    }
-
     @Override
     public String toString() {
         return "Producto{" +
@@ -91,9 +89,7 @@ public abstract class Producto {
         this.stock = stock;
     }
     
-
     // Método abstracto
     public abstract double calcularPrecioFinal();
-
 }
 

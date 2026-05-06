@@ -1,17 +1,18 @@
 package supermercado;
-
 public class Cereal extends Producto implements Mensaje{
     protected double contenidoGramos;
     protected String tipo;
     
-    //constructor vacio
+    //constructor
     public Cereal(){
         
     }
+    
     public Cereal(double contenidoGramos, String tipo){
         this.contenidoGramos = contenidoGramos;
         this.tipo = tipo;
     }
+    
     public Cereal(double precioBase, String nombre, String marca, String categoria, int id, int stock, int cantidad, double contenidoGramos, String tipo){
         super(precioBase,nombre,marca,categoria,id,stock, cantidad);
         this.contenidoGramos = contenidoGramos;

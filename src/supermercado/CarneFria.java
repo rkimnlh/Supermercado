@@ -6,7 +6,6 @@ public class  CarneFria extends Producto implements Mensaje{
     
     //Constructores
     public CarneFria (){
-        
     }
     
     public CarneFria(double pesoKg, String tipoCarne){

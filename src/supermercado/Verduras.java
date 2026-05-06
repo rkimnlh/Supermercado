@@ -4,17 +4,16 @@ public class Verduras extends Producto implements Mensaje{
     //Atributos
     protected double pesoKg;
     
-    //constructor
-
+    //constructor 
     public Verduras() {
+    }
+    
+    public Verduras(double pesoKg, String tipoUnidad) {
+        this.pesoKg = pesoKg;
     }
     
     public Verduras(double pesoKg, double precioBase, String nombre, String marca, String categoria, int id, int stock, int cantidad) {
         super(precioBase, nombre, marca, categoria, id, stock, cantidad);
-        this.pesoKg = pesoKg;
-    }
-
-    public Verduras(double pesoKg, String tipoUnidad) {
         this.pesoKg = pesoKg;
     }
 
