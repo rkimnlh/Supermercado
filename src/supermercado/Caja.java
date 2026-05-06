@@ -16,21 +16,21 @@ public class Caja {
     }
 
     private String obtenerListaYCalcular() {
-        String acumulador = ""; // Usamos un String simple en lugar de StringBuilder
+        String acumulador = ""; 
         this.subtotal = 0.0; 
 
         for (Producto item : carrito) {
-            String mensajePromo = ""; // Variable para guardar el return
+            String mensajePromo = ""; // aqui guardamos el return
 
             try {
-                // Intentamos el cast
+                // realizamos el cast
                 Mensaje promo = (Mensaje) item;
 
-                // USAMOS EL RETURN AQUÍ
+                // aqui utilizamos la interfaz 
                 mensajePromo = promo.mostrarDetalle();
 
             } catch (ClassCastException e) {
-                // Si no es promocionable, el mensaje se queda vacío ""
+                // Si no muestra nada, el mensaje se queda vacío ""
             }
 
                     // Al calcular el precio final, el polimorfismo sigue funcionando
@@ -60,10 +60,9 @@ public class Caja {
     
     @Override
     public String toString() {
-        // 1. Calculamos y obtenemos el texto de los productos
+        // Calculamos y obtenemos el texto de los productos
         String listaProductos = obtenerListaYCalcular();
 
-        // 2. El String.format con el diseño del ticket
         return String.format("""
             ============================================
                             TIENDA
