@@ -11,6 +11,13 @@ public class Caja {
         this.carrito = new ArrayList<>();
     }
 
+    public Caja(ArrayList<Producto> carrito, double subtotal, double iva, double total) {
+        this.carrito = carrito;
+        this.subtotal = subtotal;
+        this.iva = iva;
+        this.total = total;
+    }
+
     public void agregarProducto(Producto p) {
         this.carrito.add(p);
     }
