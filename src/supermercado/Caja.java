@@ -20,38 +20,25 @@ public class Caja {
         this.subtotal = 0.0; 
 
         for (Producto item : carrito) {
-            String mensajePromo = ""; // aqui guardamos el return
-
+            String mensajePromo = "";
             try {
-                // realizamos el cast
-                Mensaje promo = (Mensaje) item;
-
-                // aqui utilizamos la interfaz 
+                Mensaje promo = (Mensaje) item;//tratamos el obejto item como si fuera de tipo Mensaje y no Producto
                 mensajePromo = promo.mostrarDetalle();
-
             } catch (ClassCastException e) {
-                // Si no muestra nada, el mensaje se queda vacío ""
+                //si la interfaz no se implementa en la clase el caasting falla, pero con el catch lo ignoramos y continua la ejecucion 
             }
-
-                    // Al calcular el precio final, el polimorfismo sigue funcionando
             double precioFinal = item.calcularPrecioFinal();
             double totalItem = item.getCantidad() * precioFinal;
             this.subtotal += totalItem;
+            // Agregamos el mensaje al acumulador
+            acumulador += String.format("%-6d %-15.15S %-10.2f %-10.2f\n",
+                    item.getCantidad(), item.getNombre(), precioFinal, totalItem);
 
-            // Agregamos el mensaje al acumulador si es que existe
-            acumulador += String.format("%-6d %-15.15s %-10.2f %-10.2f\n",
-                    item.getCantidad(), item.getNombre().toUpperCase(), precioFinal, totalItem);
-
-            if (!mensajePromo.equals("")) {
-                acumulador += "       " + mensajePromo + "\n"; // Se imprime debajo del producto
+            if (!mensajePromo.equals("")) {//si mensajepromo no esta vacio 
+                acumulador += "       " + mensajePromo + "\n"; //mostramos el mensaje especial
             }
         }
-            
-
-            
-        
-
-        // Calculamos el resto de los valores
+         
         this.iva = this.subtotal * 0.16;
         this.total = this.subtotal + this.iva;
 
@@ -60,9 +47,7 @@ public class Caja {
     
     @Override
     public String toString() {
-        // Calculamos y obtenemos el texto de los productos
         String listaProductos = obtenerListaYCalcular();
-
         return String.format("""
             ============================================
                             TIENDA
