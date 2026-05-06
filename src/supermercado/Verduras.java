@@ -22,7 +22,7 @@ public class Verduras extends Producto implements Mensaje{
     public double calcularPrecioFinal() {
         double precioVerdura= pesoKg*this.precioBase;
         //incremento por desperdicio
-         precioVerdura *=1.4;
+         precioVerdura *=1.04;
         return precioVerdura;
     }
 

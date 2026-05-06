@@ -23,7 +23,7 @@ public class  CarneFria extends Producto implements Mensaje{
     @Override
     public double calcularPrecioFinal(){
         double ieps=pesoKg*this.precioBase;
-        ieps *= 1.8; 
+        ieps *= 1.08; 
         return ieps;
     }
     
