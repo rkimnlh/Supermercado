@@ -25,7 +25,7 @@ public class Caja {
                 Mensaje promo = (Mensaje) item;//tratamos el obejto item como si fuera de tipo Mensaje y no Producto
                 mensajePromo = promo.mostrarDetalle();
             } catch (ClassCastException e) {
-                //si la interfaz no se implementa en la clase el caasting falla, pero con el catch lo ignoramos y continua la ejecucion 
+                //si la interfaz no se implementa en la clase el casting falla, pero con el catch lo ignoramos y continua la ejecucion 
             }
             double precioFinal = item.calcularPrecioFinal();
             double totalItem = item.getCantidad() * precioFinal;

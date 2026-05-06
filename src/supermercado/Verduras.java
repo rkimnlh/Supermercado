@@ -2,7 +2,7 @@ package supermercado;
 // @author susiy
 public class Verduras extends Producto implements Mensaje{
     //Atributos
-    private double pesoKg;
+    protected double pesoKg;
     
     //constructor
 

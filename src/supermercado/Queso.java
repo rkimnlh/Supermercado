@@ -4,9 +4,9 @@ package supermercado;
 import java.time.LocalDate;
 
 public class Queso extends Lacteo {
-    private String tipoQueso;
-    private double pesoKg;
-    private boolean esImportado;
+    protected String tipoQueso;
+    protected double pesoKg;
+    protected boolean esImportado;
 
     // Constructor
     public Queso(double precioBase, String nombre, String marca, String categoria, int id, int stock,

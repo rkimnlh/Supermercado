@@ -4,8 +4,8 @@ package supermercado;
 import java.time.LocalDate;
 
 public class Lacteo extends Producto implements Mensaje{
-    private String tipoLeche;
-    private LocalDate fechaCaducidad;
+    protected String tipoLeche;
+    protected LocalDate fechaCaducidad;
 
     // Constructor
     public Lacteo(double precioBase, String nombre, String marca, String categoria, int id, int stock,
