@@ -17,7 +17,7 @@ public class Queso extends Lacteo {
     }
     
     // Constructor
-    public Queso(double precioBase, String nombre, String marca, String categoria, int id, int stock,
+    public Queso(double precioBase, String nombre, String marca, String categoria, String id, int stock,
                  int cantidad, String tipoLeche, LocalDate fechaCaducidad,
                  String tipoQueso, double pesoKg, boolean esImportado) {
         super(precioBase, nombre, marca, categoria, id, stock, cantidad, tipoLeche, fechaCaducidad);

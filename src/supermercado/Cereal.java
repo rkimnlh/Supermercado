@@ -16,7 +16,7 @@ public class Cereal extends Producto implements Mensaje{
         this.tipo = tipo;
     }
     
-    public Cereal(double precioBase, String nombre, String marca, String categoria, int id, int stock, int cantidad, double contenidoGramos, String tipo){
+    public Cereal(double precioBase, String nombre, String marca, String categoria, String id, int stock, int cantidad, double contenidoGramos, String tipo){
         super(precioBase,nombre,marca,categoria,id,stock, cantidad);
         this.contenidoGramos = contenidoGramos;
         this.tipo = tipo;

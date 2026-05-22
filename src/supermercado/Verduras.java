@@ -12,7 +12,7 @@ public class Verduras extends Producto implements Mensaje{
         this.pesoKg = pesoKg;
     }
     
-    public Verduras(double pesoKg, double precioBase, String nombre, String marca, String categoria, int id, int stock, int cantidad) {
+    public Verduras(double pesoKg, double precioBase, String nombre, String marca, String categoria, String id, int stock, int cantidad) {
         super(precioBase, nombre, marca, categoria, id, stock, cantidad);
         this.pesoKg = pesoKg;
     }

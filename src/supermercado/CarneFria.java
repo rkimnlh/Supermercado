@@ -15,7 +15,7 @@ public class  CarneFria extends Producto implements Mensaje{
         this.tipoCarne = tipoCarne;
     }
     
-    public CarneFria(double precioBase, String nombre, String marca, String categoria, int id, int stock, int cantidad,double pesoKg, String tipoCarne){
+    public CarneFria(double precioBase, String nombre, String marca, String categoria, String id, int stock, int cantidad,double pesoKg, String tipoCarne){
         super(precioBase,nombre,marca,categoria,id,stock, cantidad);
         this.pesoKg = pesoKg;
         this.tipoCarne = tipoCarne;

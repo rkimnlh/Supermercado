@@ -17,7 +17,7 @@ public class Lacteo extends Producto implements Mensaje{
     }
     
     // Constructor
-    public Lacteo(double precioBase, String nombre, String marca, String categoria, int id, int stock,
+    public Lacteo(double precioBase, String nombre, String marca, String categoria, String id, int stock,
                   int cantidad, String tipoLeche, LocalDate fechaCaducidad) {
         super(precioBase, nombre, marca, categoria, id, stock, cantidad);
         this.tipoLeche = tipoLeche;

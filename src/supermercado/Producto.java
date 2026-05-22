@@ -9,7 +9,7 @@ public abstract class Producto implements Serializable{
     protected String nombre;
     protected String marca;
     protected String categoria;
-    protected int id;
+    protected String id;
     protected int stock;
     protected int cantidad;
     
@@ -19,7 +19,7 @@ public abstract class Producto implements Serializable{
     }
 
     // Constructor
-    public Producto (double precioBase, String nombre, String marca, String categoria, int id, int stock, int cantidad) {
+    public Producto (double precioBase, String nombre, String marca, String categoria, String id, int stock, int cantidad) {
         this.precioBase = precioBase;
         this.nombre = nombre;
         this.marca = marca;
@@ -78,11 +78,11 @@ public abstract class Producto implements Serializable{
         this.categoria = categoria;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

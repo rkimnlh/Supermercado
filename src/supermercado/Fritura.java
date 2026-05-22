@@ -18,7 +18,7 @@ public class Fritura extends Producto implements Mensaje{
         this.contenidoGramos = contenidoGramos;
     }
     
-    public Fritura(String tipoFritura, String sabor, double contenidoGramos, double precioBase, String nombre, String marca, String categoria, int id, int stock, int cantidad) {
+    public Fritura(String tipoFritura, String sabor, double contenidoGramos, double precioBase, String nombre, String marca, String categoria, String id, int stock, int cantidad) {
         super(precioBase, nombre, marca, categoria, id, stock, cantidad);
         this.tipoFritura = tipoFritura;
         this.sabor = sabor;
