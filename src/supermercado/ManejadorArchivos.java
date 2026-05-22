@@ -88,4 +88,95 @@ public class ManejadorArchivos {
             }
         }
     }
+    private static String archivoVentas = "ventas.dat";
+
+    // MÉTODO 3: GUARDAR HISTORIAL DE VENTAS
+    public static void guardarVentas(ArrayList<String> listaVentas) {
+        FileOutputStream canalArchivo = null;
+        ObjectOutputStream escribidorObjetos = null;
+
+        try {
+            canalArchivo = new FileOutputStream(archivoVentas);
+            escribidorObjetos = new ObjectOutputStream(canalArchivo);
+            
+            // Guardamos la lista de textos de las ventas realizadas
+            escribidorObjetos.writeObject(listaVentas);
+            
+        } catch (IOException e) {
+            System.out.println("Error al intentar guardar el historial de ventas: " + e.getMessage());
+        } finally {
+            try {
+                if (escribidorObjetos != null) {
+                    escribidorObjetos.close();
+                }
+                if (canalArchivo != null) {
+                    canalArchivo.close();
+                }
+            } catch (IOException e) {
+                System.out.println("Error al cerrar archivo de ventas: " + e.getMessage());
+            }
+        }
+    }
+
+    // MÉTODO 4: CARGAR HISTORIAL DE VENTAS
+    public static ArrayList<String> cargarVentas() {
+        File archivoFisico = new File(archivoVentas);
+        if (archivoFisico.exists() == false) {
+            return new ArrayList<String>(); // Si no hay ventas registradas, regresa lista vacía
+        }
+
+        FileInputStream canalArchivo = null;
+        ObjectInputStream lectorObjetos = null;
+        ArrayList<String> listaVentasCargadas = null;
+
+        try {
+            canalArchivo = new FileInputStream(archivoVentas);
+            lectorObjetos = new ObjectInputStream(canalArchivo);
+            
+            listaVentasCargadas = (ArrayList<String>) lectorObjetos.readObject();
+            return listaVentasCargadas;
+            
+        } catch (IOException e) {
+            System.out.println("Error al cargar las ventas: " + e.getMessage());
+            return new ArrayList<String>();
+        } catch (ClassNotFoundException e) {
+            System.out.println("Error de conversión en ventas: " + e.getMessage());
+            return new ArrayList<String>();
+        } finally {
+            try {
+                if (lectorObjetos != null) {
+                    lectorObjetos.close();
+                }
+                if (canalArchivo != null) {
+                    canalArchivo.close();
+                }
+            } catch (IOException e) {
+                System.out.println("Error al cerrar archivo de lectura de ventas: " + e.getMessage());
+            }
+        }
+    }
+    public class Validador {
+
+    // Si la clave está mal, avisa que hay un error (throws)
+    public static void validarClave(String clave) throws IdInvalidaException {
+        // .trim() quita los espacios en blanco vacíos. .length() cuenta las letras.
+        if (clave == null || clave.trim().isEmpty() || clave.trim().length() < 3) {
+            throw new IdInvalidaException("La clave debe tener al menos 3 caracteres alfanuméricos.");
+        }
+    }
+
+    // Si el precio es menor o igual a cero, lanza error
+    public static void validarPrecio(double precio) throws PrecioInvalidoException {
+        if (precio <= 0) {
+            throw new PrecioInvalidoException("El precio debe ser un número positivo mayor a 0.");
+        }
+    }
+
+    // Si el inventario inicial es menor a cero (negativo), lanza error
+    public static void validarStockInicial(int stock) throws StockInvalidoException {
+        if (stock < 0) {
+            throw new StockInvalidoException("El inventario inicial no puede ser negativo.");
+        }
+    }
+
 }
