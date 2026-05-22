@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class ManejadorArchivos {
     
     // Nombre del archivo donde se guardarán los productos
-    private static String archivoInventario = "inventario.dat";
+    private static String archivoInventario = "inventario.str";
 
     // MÉTODO 1: GUARDAR EL INVENTARIO (ESCRITURA)
     public static void guardarInventario(ArrayList<Producto> lista) {
@@ -28,9 +28,9 @@ public class ManejadorArchivos {
             escribidorObjetos.writeObject(lista);
             System.out.println("-> Inventario guardado exitosamente en el archivo binario.");
             
-        } catch (IOException e) {
+        } catch (IOException ex) {
             // Si ocurre un error de lectura/escritura, lo atrapamos aquí
-            System.out.println("Error al intentar guardar el inventario: " + e.getMessage());
+            System.out.println("Error al intentar guardar el inventario: " + ex.getMessage());
         } finally {
             // El bloque finally SIEMPRE se ejecuta, sirve para cerrar los archivos obligatoriamente
             try {
@@ -40,8 +40,8 @@ public class ManejadorArchivos {
                 if (canalArchivo != null) {
                     canalArchivo.close(); // Cerramos el canal
                 }
-            } catch (IOException e) {
-                System.out.println("Error al cerrar el archivo de inventario: " + e.getMessage());
+            } catch (IOException ex) {
+                System.out.println("Error al cerrar el archivo de inventario: " + ex.getMessage());
             }
         }
     }
@@ -68,11 +68,11 @@ public class ManejadorArchivos {
             listaCargada = (ArrayList<Producto>) lectorObjetos.readObject();
             return listaCargada;
             
-        } catch (IOException e) {
-            System.out.println("Error de lectura al cargar inventario: " + e.getMessage());
+        } catch (IOException ex) {
+            System.out.println("Error de lectura al cargar inventario: " + ex.getMessage());
             return new ArrayList<Producto>(); // Si falla, regresa lista vacía
-        } catch (ClassNotFoundException e) {
-            System.out.println("Error de conversión de datos: " + e.getMessage());
+        } catch (ClassNotFoundException ex) {
+            System.out.println("Error de conversión de datos: " + ex.getMessage());
             return new ArrayList<Producto>();
         } finally {
             // Cerramos los canales manualmente
@@ -83,8 +83,8 @@ public class ManejadorArchivos {
                 if (canalArchivo != null) {
                     canalArchivo.close();
                 }
-            } catch (IOException e) {
-                System.out.println("Error al cerrar los archivos al leer: " + e.getMessage());
+            } catch (IOException ex) {
+                System.out.println("Error al cerrar los archivos al leer: " + ex.getMessage());
             }
         }
     }
