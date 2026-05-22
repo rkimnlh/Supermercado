@@ -178,5 +178,5 @@ public class ManejadorArchivos {
             throw new StockInvalidoException("El inventario inicial no puede ser negativo.");
         }
     }
-
+    }
 }
