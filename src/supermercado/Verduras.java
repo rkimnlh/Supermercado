@@ -1,6 +1,7 @@
 package supermercado;
 // @author susiy
 public class Verduras extends Producto implements Mensaje{
+    private static final long serialVersionUID = 1L;
     //Atributos
     protected double pesoKg;
     
