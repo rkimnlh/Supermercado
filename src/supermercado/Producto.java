@@ -1,5 +1,8 @@
 package supermercado;
-public abstract class Producto {
+
+import java.io.Serializable;
+
+public abstract class Producto implements Serializable{
     protected double precioBase;
     protected String nombre;
     protected String marca;

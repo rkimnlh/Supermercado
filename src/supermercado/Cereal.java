@@ -1,4 +1,5 @@
 package supermercado;
+
 public class Cereal extends Producto implements Mensaje{
     protected double contenidoGramos;
     protected String tipo;
