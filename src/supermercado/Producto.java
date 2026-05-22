@@ -3,6 +3,8 @@ package supermercado;
 import java.io.Serializable;
 
 public abstract class Producto implements Serializable{
+    private static final long serialVersionUID = 1L;
+    
     protected double precioBase;
     protected String nombre;
     protected String marca;

@@ -1,6 +1,8 @@
 package supermercado;
 import java.time.LocalDate;
 public class Lacteo extends Producto implements Mensaje{
+    private static final long serialVersionUID = 1L;
+    
     protected String tipoLeche;
     protected LocalDate fechaCaducidad;
 

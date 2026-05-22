@@ -1,6 +1,8 @@
 package supermercado;
 
 public class Fritura extends Producto implements Mensaje{
+    private static final long serialVersionUID = 1L;
+    
     protected String tipoFritura; 
     protected String sabor; 
     protected double contenidoGramos; 
