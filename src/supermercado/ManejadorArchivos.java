@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class ManejadorArchivos {
     
     // Nombre del archivo donde se guardarán los productos
-    private static String archivoInventario = "inventario.dat";
+    //ObjectOutputStream archivo = new ObjectOutputStream(new FileOutputStream("./src/supermercado/archivoInventario.str"));
 
     // MÉTODO 1: GUARDAR EL INVENTARIO (ESCRITURA)
     public static void guardarInventario(ArrayList<Producto> lista) {
@@ -19,8 +19,10 @@ public class ManejadorArchivos {
         ObjectOutputStream escribidorObjetos = null;
 
         try {
+            // Nombre del archivo donde se guardarán los productos
+            ObjectOutputStream archivo = new ObjectOutputStream(new FileOutputStream("./src/supermercado/archivoInventario.str"));
             // Abrimos el archivo binario
-            canalArchivo = new FileOutputStream(archivoInventario);
+            canalArchivo = new FileOutputStream("./src/supermercado/archivoInventario.str");
             // Creamos el filtro para poder escribir objetos completos (como el ArrayList)
             escribidorObjetos = new ObjectOutputStream(canalArchivo);
             
@@ -49,7 +51,7 @@ public class ManejadorArchivos {
     // MÉTODO 2: LECTURA DEL INVENTARIO (CARGAR AL INICIAR)
     public static ArrayList<Producto> cargarInventario() {
         // Validamos si el archivo físico ya existe en la computadora
-        File archivoFisico = new File(archivoInventario);
+        File archivoFisico = new File("./src/supermercado/archivoInventario.str");
         if (archivoFisico.exists() == false) {
             // Si el archivo no existe (como la primera vez que corres el programa),
             // regresamos una lista vacía para que el programa no falle.
@@ -61,7 +63,7 @@ public class ManejadorArchivos {
         ArrayList<Producto> listaCargada = null;
 
         try {
-            canalArchivo = new FileInputStream(archivoInventario);
+            canalArchivo = new FileInputStream("./src/supermercado/archivoInventario.str");
             lectorObjetos = new ObjectInputStream(canalArchivo);
             
             // Leemos el objeto del archivo y lo transformamos (cast) a un ArrayList de Productos

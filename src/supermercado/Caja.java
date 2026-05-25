@@ -23,6 +23,10 @@ public class Caja {
         this.carrito.add(p);
     }
 
+    public ArrayList<Producto> getCarrito() {
+        return this.carrito;
+    }
+    
     private String obtenerListaYCalcular() {
         String acumulador = ""; 
         this.subtotal = 0.0; 

@@ -74,6 +74,12 @@ public abstract class Producto implements Serializable{
         return categoria;
     }
 
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+    
+    
+
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
