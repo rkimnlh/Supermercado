@@ -141,7 +141,7 @@ public class ManejadorArchivos {
             return new ArrayList<Venta>();
         } catch (ClassNotFoundException e) {
             System.out.println("Error de conversión en ventas: " + e.getMessage());
-            return new ArrayList<String>();
+            return new ArrayList<Venta>();
         } finally {
             try {
                 if (lectorObjetos != null) {

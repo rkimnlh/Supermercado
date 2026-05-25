@@ -8,7 +8,7 @@ public class SuperMercado {
         
         // Cargamos las listas desde los archivos binarios al arrancar
         ArrayList<Producto> inventario = ManejadorArchivos.cargarInventario();
-        ArrayList<String> ventas = ManejadorArchivos.cargarVentas();
+        ArrayList<Venta> ventas = ManejadorArchivos.cargarVentas();
         
         int opcion = 0;
 
@@ -54,7 +54,7 @@ public class SuperMercado {
                         }
 
                         // Instanciamos usando tu clase existente Fritura
-                        Fritura nuevoProducto = new Fritura("Papa", "Sal", 100, precio, nombre, "Sabritas", "Frituras", id, stock, 0);
+                        Fritura nuevoProducto = new Fritura("Papa", "Sal", 100, 100, "nombre", "Sabritas", "Frituras", "id", 14, 0);
                         
                         inventario.add(nuevoProducto);
                         ManejadorArchivos.guardarInventario(inventario);
@@ -92,53 +92,92 @@ public class SuperMercado {
                 case 3:
                     System.out.print("Ingrese el ID del producto que quiere vender: ");
                     try {
-                        int idBuscar = Integer.parseInt(sc.nextLine());
+                        // CORRECCIÓN 1: Capturamos el ID directamente como texto (String)
+                        String idBuscar = sc.nextLine().trim();
                         Producto encontrado = null;
                         
                         for (int i = 0; i < inventario.size(); i++) {
-                            if (inventario.get(i).getId() == idBuscar) {
+                            
+                            if (inventario.get(i).getId().equalsIgnoreCase(idBuscar)) {
                                 encontrado = inventario.get(i);
                                 break;
                             }
                         }
 
-                        if (encontrado == null) {
+                          if (encontrado == null) {
+
                             System.out.println("El producto no existe.");
+
                             break;
+
                         }
+
+
 
                         System.out.print("Ingrese la cantidad a vender: ");
+
                         int cantidad = Integer.parseInt(sc.nextLine());
+
                         
+
                         if (cantidad <= 0) {
+
                             throw new StockInvalidoException("La cantidad a vender debe ser mayor a 0.");
+
                         }
+
                         if (cantidad > encontrado.getStock()) {
+
                             throw new StockInvalidoException("No hay suficiente stock. Disponible: " + encontrado.getStock());
+
                         }
+
+
 
                         // Actualizamos stock
+
                         encontrado.setStock(encontrado.getStock() - cantidad);
+
                         
+
                         // Polimorfismo en acción
+
                         double importe = cantidad * encontrado.calcularPrecioFinal();
+
                         
+
                         // Guardamos registro de venta
+
                         Venta nuevaVenta = new Venta(encontrado.getNombre(), cantidad, importe);
+
                         ventas.add(nuevaVenta);
+
                         
+
                         // Guardado persistente
+
                         ManejadorArchivos.guardarInventario(inventario);
+
                         ManejadorArchivos.guardarVentas(ventas);
+
                         
+
                         System.out.println(String.format("¡Venta realizada con exito! Total cobrado: $%.2f", importe));
 
+
+
                     } catch (StockInvalidoException e) {
+
                         System.out.println("Error en venta: " + e.getMessage());
+
                     } catch (NumberFormatException e) {
+
                         System.out.println("Error: Ingrese un dato numerico valido.");
+
                     }
+
                     break;
+
 
                 case 4:
                     System.out.println("\n--- LISTA DE VENTAS DESDE ARCHIVO ---");
