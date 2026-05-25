@@ -91,7 +91,7 @@ public class ManejadorArchivos {
     private static String archivoVentas = "ventas.dat";
 
     // MÉTODO 3: GUARDAR HISTORIAL DE VENTAS
-    public static void guardarVentas(ArrayList<String> listaVentas) {
+    public static void guardarVentas(ArrayList<Venta> listaVentas) {
         FileOutputStream canalArchivo = null;
         ObjectOutputStream escribidorObjetos = null;
 
@@ -119,26 +119,26 @@ public class ManejadorArchivos {
     }
 
     // MÉTODO 4: CARGAR HISTORIAL DE VENTAS
-    public static ArrayList<String> cargarVentas() {
+    public static ArrayList<Venta> cargarVentas() {
         File archivoFisico = new File(archivoVentas);
         if (archivoFisico.exists() == false) {
-            return new ArrayList<String>(); // Si no hay ventas registradas, regresa lista vacía
+            return new ArrayList<Venta>(); // Ahora sí coinciden perfectamente
         }
 
         FileInputStream canalArchivo = null;
         ObjectInputStream lectorObjetos = null;
-        ArrayList<String> listaVentasCargadas = null;
+        ArrayList<Venta> listaVentasCargadas = null;
 
         try {
             canalArchivo = new FileInputStream(archivoVentas);
             lectorObjetos = new ObjectInputStream(canalArchivo);
             
-            listaVentasCargadas = (ArrayList<String>) lectorObjetos.readObject();
+            listaVentasCargadas = (ArrayList<Venta>) lectorObjetos.readObject();
             return listaVentasCargadas;
             
         } catch (IOException e) {
             System.out.println("Error al cargar las ventas: " + e.getMessage());
-            return new ArrayList<String>();
+            return new ArrayList<Venta>();
         } catch (ClassNotFoundException e) {
             System.out.println("Error de conversión en ventas: " + e.getMessage());
             return new ArrayList<String>();
@@ -155,7 +155,7 @@ public class ManejadorArchivos {
             }
         }
     }
-    public class Validador {
+    public static class Validador {
         // Si la clave está mal, avisa que hay un error (throws)
         public static void validarClave(String clave) throws IdInvalidaException {
             // .trim() quita los espacios en blanco vacíos. .length() cuenta las letras.
