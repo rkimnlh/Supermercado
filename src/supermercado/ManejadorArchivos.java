@@ -28,7 +28,7 @@ public class ManejadorArchivos {
             
             // Escribimos toda la lista de productos de un solo golpe en el archivo
             escribidorObjetos.writeObject(lista);
-            System.out.println("-> Inventario guardado exitosamente en el archivo binario.");
+            System.out.println("-- Inventario actualizado --");
             
         } catch (IOException e) {
             // Si ocurre un error de lectura/escritura, lo atrapamos aquí
