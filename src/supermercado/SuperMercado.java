@@ -61,20 +61,20 @@ public class SuperMercado {
                         // Continúa el flujo normal de captura de datos...
                         // ------------------------------------------------------------------
 
-                        System.out.print("Ingrese Nombre del producto: ");
+                        System.out.print("Ingrese nombre del producto: ");
                         String nombre = scanner.nextLine().trim();
                         if (nombre.length() < 3) {
                             throw new IdInvalidaException("El nombre debe tener minimo 3 caracteres.");
                         }
 
-                        System.out.print("Ingrese Marca: ");
+                        System.out.print("Ingrese marca: ");
                         String marca = scanner.nextLine().trim();
 
-                        System.out.print("Ingrese Precio Base: ");
+                        System.out.print("Ingrese precio base: ");
                         double precio = Double.parseDouble(scanner.nextLine());
                         ManejadorArchivos.Validador.validarPrecio(precio);
 
-                        System.out.print("Ingrese Stock Inicial: ");
+                        System.out.print("Ingrese stock inicial: ");
                         int stock = Integer.parseInt(scanner.nextLine());
                         ManejadorArchivos.Validador.validarStockInicial(stock);
 
@@ -84,7 +84,7 @@ public class SuperMercado {
                         System.out.println("\n¿Que tipo de producto es?");
                         System.out.println("1. Fritura");
                         System.out.println("2. Lacteo");
-                        System.out.println("3. Queso (Lacteo Especializado)");
+                        System.out.println("3. Queso");
                         System.out.println("4. Verduras");
                         System.out.print("Seleccione una opcion: ");
                         int tipoProd = Integer.parseInt(scanner.nextLine());
@@ -93,11 +93,11 @@ public class SuperMercado {
         
                         switch (tipoProd) {
                             case 1: // FRITURA
-                                System.out.print("Ingrese Tipo de Fritura: ");
+                                System.out.print("Ingrese tipo de fritura: ");
                                 String tipoF = scanner.nextLine();
-                                System.out.print("Ingrese Sabor: ");
+                                System.out.print("Ingrese sabor: ");
                                 String sabor = scanner.nextLine();
-                                System.out.print("Ingrese Contenido en Gramos: ");
+                                System.out.print("Ingrese contenido en gramos: ");
                                 double gramos = Double.parseDouble(scanner.nextLine());
 
                                 // Instanciamos la Fritura con sus datos específicos y generales
@@ -105,22 +105,22 @@ public class SuperMercado {
                                 break;
 
                             case 2: // LACTEO
-                                System.out.print("Ingrese Tipo de Leche: ");
+                                System.out.print("Ingrese tipo de leche: ");
                                 String tipoL = scanner.nextLine();
-                                System.out.print("Ingrese Fecha de Caducidad (AAAA-MM-DD): ");
+                                System.out.print("Ingrese fecha de caducidad (AAAA-MM-DD): ");
                                 LocalDate fechaC = LocalDate.parse(scanner.nextLine()); // Requiere formato estricto: 2026-05-25
 
                                 nuevoProducto = new Lacteo(precio, nombre, marca, "Lacteos", id, stock, 0, tipoL, fechaC);
                                 break;
 
                             case 3: // QUESO (Hereda de Lacteo)
-                                System.out.print("Ingrese Tipo de Leche: ");
+                                System.out.print("Ingrese tipo de leche: ");
                                 String tipoLecheQ = scanner.nextLine();
-                                System.out.print("Ingrese Fecha de Caducidad: ");
+                                System.out.print("Ingrese fecha de caducidad: ");
                                 LocalDate fechaCadQ = LocalDate.parse(scanner.nextLine());
-                                System.out.print("Ingrese Tipo de Queso: ");
+                                System.out.print("Ingrese tipo de Queso: ");
                                 String tipoQ = scanner.nextLine();
-                                System.out.print("Ingrese Peso en Kg: ");
+                                System.out.print("Ingrese peso en Kg: ");
                                 double pesoQ = Double.parseDouble(scanner.nextLine());
                                 System.out.print("¿Es importado? (true/false): ");
                                 boolean esImportado = Boolean.parseBoolean(scanner.nextLine());
@@ -129,7 +129,7 @@ public class SuperMercado {
                                 break;
 
                             case 4: // VERDURAS
-                                System.out.print("Ingrese el Peso en Kg de la muestra/empaque: ");
+                                System.out.print("Ingrese el peso en Kg de la muestra/empaque: ");
                                 double pesoV = Double.parseDouble(scanner.nextLine());
 
                                 nuevoProducto = new Verduras(pesoV, precio, nombre, marca, "Verduras", id, stock, 0);
@@ -287,13 +287,13 @@ public class SuperMercado {
                             // 2. Sobrescribimos el archivo binario para actualizar el disco duro
                             ManejadorArchivos.guardarInventario(inventario); 
 
-                            System.out.println("¡Éxito! El producto '" + nombreEliminado + "' con ID [" + idBorrar + "] fue eliminado.");
+                            System.out.println("¡Exito! El producto '" + nombreEliminado + "' con ID [" + idBorrar + "] fue eliminado.");
                             encontradoParaBorrar = true;
                              // Salimos del ciclo porque los IDs son únicos
                         }
                     }
                     if (!encontradoParaBorrar) 
-                        System.out.println("No se encontró ningún producto con el ID [" + idBorrar + "].");
+                        System.out.println("No se encontro ningun producto con el ID [" + idBorrar + "].");
                     break;
                 case 6:
                     System.out.println("Saliendo del programa persistente...");
