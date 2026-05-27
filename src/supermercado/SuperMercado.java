@@ -336,7 +336,7 @@ public class SuperMercado {
                                         // Agregamos el producto directamente al carrito de la caja
                                         cajaActual.getCarrito().add(encontrado);
 
-                                        System.out.println(encontrado.getNombre() + "' agregado al carrito de la caja.");
+                                        System.out.println(encontrado.getNombre() + " agregado al carrito de la caja.");
                                     }
                                 } catch (NumberFormatException e) {
                                     System.out.println("Error: Ingrese un dato numerico valido.");
