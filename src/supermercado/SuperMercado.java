@@ -16,11 +16,11 @@ public class SuperMercado {
         do {
             
             System.out.println("\n=== SECCION DE ARCHIVOS E INVENTARIO ===");
-            System.out.println("1. Agregar Producto");
-            System.out.println("2. Mostrar Inventario");
-            System.out.println("3. Registrar Venta");
-            System.out.println("4. Consultar Ventas Realizadas");
-            System.out.println("5. Eliminar Producto del Inventario"); 
+            System.out.println("1. Agregar producto");
+            System.out.println("2. Mostrar inventario");
+            System.out.println("3. Registrar venta");
+            System.out.println("4. Consultar ventas realizadas");
+            System.out.println("5. Eliminar producto del inventario"); 
             System.out.println("6. Salir"); 
             System.out.print("Seleccione una opcion: ");
             
@@ -77,34 +77,31 @@ public class SuperMercado {
                         System.out.print("Ingrese stock inicial: ");
                         int stock = Integer.parseInt(scanner.nextLine());
                         ManejadorArchivos.Validador.validarStockInicial(stock);
-
-                        // [Aquí continúa el submenú switch(tipoProd) que ya tienes de la fritura, lácteo, etc.]
-
-                        // SUBMENÚ: Seleccionar el tipo específico de producto
-                        System.out.println("\n¿Que tipo de producto es?");
+                        
+                        System.out.println("\nQue tipo de producto es?");
                         System.out.println("1. Fritura");
                         System.out.println("2. Lacteo");
                         System.out.println("3. Queso");
                         System.out.println("4. Verduras");
+                        System.out.println("5. Cereal");         
+                        System.out.println("6. Carne Fria");     
                         System.out.print("Seleccione una opcion: ");
                         int tipoProd = Integer.parseInt(scanner.nextLine());
 
-                        Producto nuevoProducto = null; // Variable abstracta contenedora (Polimorfismo)
-        
+                        Producto nuevoProducto = null; 
+                       
                         switch (tipoProd) {
-                            case 1: // FRITURA
+                            case 1: //fritura
                                 System.out.print("Ingrese tipo de fritura: ");
                                 String tipoF = scanner.nextLine();
                                 System.out.print("Ingrese sabor: ");
                                 String sabor = scanner.nextLine();
                                 System.out.print("Ingrese contenido en gramos: ");
                                 double gramos = Double.parseDouble(scanner.nextLine());
-
-                                // Instanciamos la Fritura con sus datos específicos y generales
                                 nuevoProducto = new Fritura(tipoF, sabor, gramos, precio, nombre, marca, "Frituras", id, stock, 0);
                                 break;
 
-                            case 2: // LACTEO
+                            case 2: // lacteo
                                 System.out.print("Ingrese tipo de leche: ");
                                 String tipoL = scanner.nextLine();
                                 System.out.print("Ingrese fecha de caducidad (AAAA-MM-DD): ");
@@ -114,9 +111,8 @@ public class SuperMercado {
                                 break;
 
                             case 3: // QUESO (Hereda de Lacteo)
-                                System.out.print("Ingrese tipo de leche: ");
-                                String tipoLecheQ = scanner.nextLine();
-                                System.out.print("Ingrese fecha de caducidad: ");
+                                
+                                System.out.print("Ingrese fecha de caducidad (AAAA-MM-DD): ");
                                 LocalDate fechaCadQ = LocalDate.parse(scanner.nextLine());
                                 System.out.print("Ingrese tipo de Queso: ");
                                 String tipoQ = scanner.nextLine();
@@ -125,7 +121,7 @@ public class SuperMercado {
                                 System.out.print("¿Es importado? (true/false): ");
                                 boolean esImportado = Boolean.parseBoolean(scanner.nextLine());
 
-                                nuevoProducto = new Queso(precio, nombre, marca, "Lacteos", id, stock, 0, tipoLecheQ, fechaCadQ, tipoQ, pesoQ, esImportado);
+                                nuevoProducto = new Queso(precio, nombre, marca, "Lacteos", id, stock, 0, fechaCadQ, tipoQ, pesoQ, esImportado);
                                 break;
 
                             case 4: // VERDURAS
@@ -133,6 +129,27 @@ public class SuperMercado {
                                 double pesoV = Double.parseDouble(scanner.nextLine());
 
                                 nuevoProducto = new Verduras(pesoV, precio, nombre, marca, "Verduras", id, stock, 0);
+                                break;
+
+                         case 5: // CEREAL
+                                System.out.print("Ingrese contenido neto en gramos: ");
+                               
+                                double gramosCereal = Double.parseDouble(scanner.nextLine());
+                              
+                                System.out.print("Ingrese el tipo de cereal (ej. Avena, Trigo, Azucarado): ");
+                                String tipoCereal = scanner.nextLine().trim();
+                                
+                                nuevoProducto = new Cereal(precio, nombre, marca, "Cereales", id, stock, 0, gramosCereal, tipoCereal);
+                                break;
+
+                            case 6: // CARNE FRÍA
+                                System.out.print("Ingrese el peso en Kg: ");
+                                double pesoCarne = Double.parseDouble(scanner.nextLine());
+                                
+                                System.out.print("Ingrese el tipo de carne (ej. Cerdo, Pavo, Res): ");
+                                String tipoCarne = scanner.nextLine().trim();
+                               
+                                nuevoProducto = new CarneFria(precio, nombre, marca, "Carnes Frias", id, stock, 0, pesoCarne, tipoCarne);
                                 break;
 
                             default:
@@ -156,22 +173,84 @@ public class SuperMercado {
                         }
                         break;
                 case 2:
-                    System.out.println("\n---------------------------------------------------------");
-                    System.out.printf("%-6s | %-18s | %-6s | %-12s\n", "ID", "NOMBRE", "STOCK", "PRECIO BASE");
-                    System.out.println("---------------------------------------------------------");
+                    int subOpcion = 0;
+                    do {
+                       System.out.println("\n=== VISUALIZAR INVENTARIO ===");
+                        System.out.println("1. Inventario general");
+                        System.out.println("2. Ver detalles de frituras");
+                        System.out.println("3. Ver detalles de lacteos y quesos");
+                        System.out.println("4. Ver detalles de verduras");
+                        System.out.println("5. Ver detalles de cereales");      
+                        System.out.println("6. Ver detalles de carnes frias");  
+                        System.out.println("7. Regresar al Menu Principal");    
+                        System.out.print("Seleccione una opcion: ");
+                        try {
+                            subOpcion = Integer.parseInt(scanner.nextLine());
 
-                    if (inventario.isEmpty()) {
-                        System.out.println("         El inventario esta vacio.");
-                    } else {
-                        for (int i = 0; i < inventario.size(); i++) {
-                            Producto p = inventario.get(i);
-                            // CORRECCIÓN 1: Formateador %-6s para p.getId() que es String
-                            System.out.println(String.format("%-6s | %-18.18s | %-6d | $%10.2f", 
-                                    p.getId(), p.getNombre(), p.getStock(), p.getPrecioBase()));
+                            if (inventario.isEmpty() && subOpcion != 7) {
+                                System.out.println("El inventario esta completamente vacio.");
+                                continue;
+                            }
+
+                            switch (subOpcion) {
+                                case 1:
+                                    // LA TABLA GENERAL QUE YA TENÍAN
+                                    System.out.println("\n---------------------------------------------------------");
+                                    System.out.printf("%-6s | %-18s | %-6s | %-12s\n", "ID", "NOMBRE", "STOCK", "PRECIO BASE");
+                                    System.out.println("---------------------------------------------------------");
+                                    for (int i = 0; i < inventario.size(); i++) {
+                                        Producto p = inventario.get(i);
+                                        System.out.println(String.format("%-6s | %-18.18s | %-6d | $%10.2f", 
+                                                p.getId(), p.getNombre(), p.getStock(), p.getPrecioBase()));
+                                    }
+                                    System.out.println("---------------------------------------------------------");
+                                    break;
+
+                                case 2: // DETALLES DE FRITURAS
+                                case 3: // DETALLES DE LÁCTEOS
+                                case 4: // DETALLES DE VERDURAS
+                                case 5: //cereales 
+                                case 6: //carne fria 
+                                    System.out.println("\n--- DETALLES DE CATEGORIA ---");
+                                    boolean hayProductos = false;
+                                
+                                    for (Producto p : inventario) {
+                                        if (subOpcion == 2 && p instanceof Fritura) {
+                                            System.out.println(p.toString());
+                                            hayProductos = true;
+                                        } else if (subOpcion == 3 && p instanceof Lacteo) {
+                                            System.out.println(p.toString());
+                                            hayProductos = true;
+                                        } else if (subOpcion == 4 && p instanceof Verduras) {
+                                            System.out.println(p.toString());
+                                            hayProductos = true;
+                                        } else if (subOpcion == 5 && p instanceof Cereal) {      // NUEVO
+                                            System.out.println(p.toString());
+                                            hayProductos = true;
+                                        } else if (subOpcion == 6 && p instanceof CarneFria) {   // NUEVO
+                                            System.out.println(p.toString());
+                                            hayProductos = true;
+                                        }
+                                    }
+
+                                    if (!hayProductos) {
+                                        System.out.println("No hay productos registrados en esta categoria especifica.");
+                                    }
+                                    break;
+
+                            case 7: 
+                                System.out.println("Regresando al menu principal...");
+                                break;
+                                
+
+                            default:
+                                System.out.println("Opcion invalida.");
+                            }
+                        } catch (NumberFormatException e) {
+                            System.out.println("Error: Debe ingresar un numero entero.");
                         }
-                    }
-                    System.out.println("---------------------------------------------------------");
-                break;
+                    } while (subOpcion != 7);
+                    break;
 
                 case 3:
                     System.out.println("\n=== INICIAR NUEVA VENTA ===");
@@ -197,31 +276,49 @@ public class SuperMercado {
                         if (encontrado == null) {
                             System.out.println("El producto no existe en el inventario.");
                         } else {
-                            System.out.print("Ingrese la cantidad a vender: ");
-                            try {
-                                int cantidad = Integer.parseInt(scanner.nextLine());
-
-                                if (cantidad <= 0) {
-                                    System.out.println("La cantidad debe ser mayor a 0.");
-                                } else if (cantidad > encontrado.getStock()) {
-                                    System.out.println("No hay suficiente stock. Disponible: " + encontrado.getStock());
-                                } else {
-                                    // Restamos el stock del inventario global
-                                    encontrado.setStock(encontrado.getStock() - cantidad);
-
-                                    // Asignamos la cantidad que compra este cliente
-                                    encontrado.setCantidad(encontrado.getCantidad() + cantidad); 
-
-                                    // 2. Agregamos el producto directamente al carrito de la caja
-                                    // (Asegúrate de que tu clase Caja tenga el método para añadir, o añade a su lista)
-                                    cajaActual.getCarrito().add(encontrado);
-
-                                    System.out.println(encontrado.getNombre() + " agregado al carrito de la caja.");
+                            // --- CANDADO DE CADUCIDAD ---
+                            boolean puedeVenderse = true;
+                            
+                            // Aplicamos polimorfismo para ver si el objeto tiene fecha de caducidad
+                            if (encontrado instanceof Lacteo) {
+                                Lacteo productoLacteo = (Lacteo) encontrado;
+                                
+                                // Comparamos la fecha de caducidad contra el día de hoy
+                                if (productoLacteo.getFechaCaducidad().isBefore(LocalDate.now())) {
+                                    System.out.println("ALERTA DE SANIDAD: El producto '" + encontrado.getNombre() + 
+                                                       "' caduco el " + productoLacteo.getFechaCaducidad() + " y NO puede ser vendido.");
+                                    puedeVenderse = false; // Bajamos la bandera para bloquear la venta
                                 }
-                            } catch (NumberFormatException e) {
-                                System.out.println("Error: Ingrese un dato numerico valido.");
+                            }
+
+                            // Si el producto está en buen estado (o es una fritura/verdura)
+                            if (puedeVenderse) {
+                                System.out.print("Ingrese la cantidad a vender: ");
+                                try {
+                                    int cantidad = Integer.parseInt(scanner.nextLine());
+
+                                    if (cantidad <= 0) {
+                                        System.out.println("La cantidad debe ser mayor a 0.");
+                                    } else if (cantidad > encontrado.getStock()) {
+                                        System.out.println("No hay suficiente stock. Disponible: " + encontrado.getStock());
+                                    } else {
+                                        // Restamos el stock del inventario global
+                                        encontrado.setStock(encontrado.getStock() - cantidad);
+
+                                        // Asignamos la cantidad que compra este cliente
+                                        encontrado.setCantidad(encontrado.getCantidad() + cantidad); 
+
+                                        // Agregamos el producto directamente al carrito de la caja
+                                        cajaActual.getCarrito().add(encontrado);
+
+                                        System.out.println(encontrado.getNombre() + "' agregado al carrito de la caja.");
+                                    }
+                                } catch (NumberFormatException e) {
+                                    System.out.println("Error: Ingrese un dato numerico valido.");
+                                }
                             }
                         }
+                        
 
                         System.out.print("Desea agregar otro producto al carrito? (s/n): ");
                         continuarCaja = scanner.nextLine().trim().toLowerCase();

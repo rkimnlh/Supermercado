@@ -30,7 +30,8 @@ public class Cereal extends Producto implements Mensaje{
 
     @Override
     public String toString() {
-        return super.toString()+"Cereal{" + "contenidoGramos=" + contenidoGramos + ", tipo=" + tipo + '}';
+        return String.format("%s | Cereal de %s | Contenido: %.0f g", 
+                             super.toString(), this.tipo, this.contenidoGramos);
     }
     
     @Override

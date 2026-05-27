@@ -26,6 +26,10 @@ public class Queso extends Lacteo {
         this.esImportado = esImportado;
     }
 
+    Queso(double precio, String nombre, String marca, String lacteos, String id, int stock, int i, LocalDate fechaCadQ, String tipoQ, double pesoQ, boolean esImportado) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     @Override
     public double calcularPrecioFinal() {
         // Obtenemos el precio que calcula Lacteo (que ya trae un +10% de refrigeración)
@@ -40,12 +44,9 @@ public class Queso extends Lacteo {
 
     @Override
     public String toString() {
-        String origenTexto = esImportado ? "Importado" : "Nacional";
-        return super.toString() + " -> Queso{" +
-                "tipo='" + tipoQueso + '\'' +
-                ", peso=" + pesoKg + "kg" +
-                ", origen='" + origenTexto + '\'' +
-                ", precioFinal=$" + String.format("%.2f", calcularPrecioFinal()) +
-                '}';
+     
+        String origenTexto = this.esImportado ? "Importado" : "Nacional";
+        return String.format("%s | Queso: %s | Peso: %.2f kg | Origen: %s | Final: $%.2f", 
+                             super.toString(), this.tipoQueso, this.pesoKg, origenTexto, this.calcularPrecioFinal());
     }
 }

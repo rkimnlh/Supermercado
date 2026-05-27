@@ -41,9 +41,13 @@ public class Lacteo extends Producto implements Mensaje{
 
     @Override
     public String toString() {
-        return super.toString() + " -> Lacteo{" +
-                "tipoLeche='" + tipoLeche + '\'' +
-                ", Caduca: " + fechaCaducidad + '\'' +
-                '}';
-    }      
+        return String.format("%s | Tipo Leche: %s | Caducidad: %s", 
+                             super.toString(), this.tipoLeche, this.fechaCaducidad);
+    }
+
+    public LocalDate getFechaCaducidad() {
+        return fechaCaducidad;
+    }
+    
+    
 }

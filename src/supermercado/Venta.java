@@ -12,8 +12,9 @@ public class Venta implements Serializable {
         this.importeTotal = importeTotal;
     }
 
-    @Override
+   @Override
     public String toString() {
-        return "Producto " + nombreProducto + " | Cantidad: " + cantidadVendida + " | Total: $" + importeTotal;
+        return String.format("Producto: %-28.28s | Cantidad: %-4d | Total: $%8.2f", 
+                             this.nombreProducto, this.cantidadVendida, this.importeTotal);
     }
 }

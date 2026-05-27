@@ -30,11 +30,12 @@ public class  CarneFria extends Producto implements Mensaje{
     
     
     
-    @Override
+   @Override
     public String toString() {
-        return super.toString()+"Carne Fria{" + "pesoKg=" + pesoKg + ", tipoCarne=" + tipoCarne + '}';
+        // Mantiene la tabla alineada mostrando los detalles extra
+        return String.format("%s | Carne: %s | Peso: %.2f Kg", 
+                             super.toString(), this.tipoCarne, this.pesoKg);
     }
-    
     @Override
     public String mostrarDetalle() {
         return ">>> Mantengase en refrigeracion.";

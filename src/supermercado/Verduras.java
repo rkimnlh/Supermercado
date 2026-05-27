@@ -28,7 +28,8 @@ public class Verduras extends Producto implements Mensaje{
 
     @Override
     public String toString() {
-        return super.toString()+ "Verduras{" + "pesoKg=" + pesoKg + '}';
+        return String.format("%s | Peso: %.2f kg", 
+                             super.toString(), this.pesoKg);
     }
     
     @Override

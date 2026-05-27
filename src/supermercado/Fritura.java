@@ -36,7 +36,8 @@ public class Fritura extends Producto implements Mensaje{
 
     @Override
     public String toString() {
-        return  super.toString()+"Fritura{" + "tipoFritura=" + tipoFritura + ", sabor=" + sabor + ", contenidoGramos=" + contenidoGramos + '}';
+        return String.format("%s | Sabor: %s | Contenido: %.0fg", 
+                             super.toString(), this.sabor, this.contenidoGramos);
     }
     
     @Override

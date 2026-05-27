@@ -31,15 +31,8 @@ public abstract class Producto implements Serializable{
     
     @Override
     public String toString() {
-        return "Producto{" +
-                "precioBase=" + precioBase +
-                ", nombre='" + nombre + '\'' +
-                ", marca='" + marca + '\'' +
-                ", categoria='" + categoria + '\'' +
-                ", id=" + id +
-                ", stock=" + stock +
-                ", cantidad=" + cantidad +
-                '}';
+        return String.format("ID: %s | Producto: %s | Stock: %d | Precio: $%.2f", 
+                             this.id, this.nombre, this.stock, this.precioBase);
     }
 
     public int getCantidad() {
