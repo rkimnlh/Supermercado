@@ -44,8 +44,13 @@ public class SuperMercado {
 
                         // 2. CANDADO: Validar que el ID no esté repetido en el inventario actual
                         boolean idExiste = false;
+                        // Pasamos a minúsculas el ID que el usuario acaba de teclear
+                        String idNuevo = id.toLowerCase();
                         for (int i = 0; i < inventario.size(); i++) {
-                            if (inventario.get(i).getId().equalsIgnoreCase(id)) {
+                            // Extraemos el ID del producto en esta posición del inventario y lo pasamos a minúsculas
+                            String idGuardado = inventario.get(i).getId().toLowerCase();
+                            // Ahora comparamos ambos textos en minúsculas usando el equals normal
+                            if (idGuardado.equals(idNuevo)) {
                                 idExiste = true;
                                 break; // Ya encontramos que existe, no tiene caso seguir buscando
                             }
@@ -284,8 +289,10 @@ public class SuperMercado {
                         Producto encontrado = null;
 
                         // Buscamos el producto en el inventario global
+                        String idBuscarMin = idBuscar.toLowerCase(); // Lo estandarizamos antes del ciclo
                         for (int i = 0; i < inventario.size(); i++) {
-                            if (inventario.get(i).getId().equalsIgnoreCase(idBuscar)) {
+                            String idGuardado = inventario.get(i).getId().toLowerCase(); // Extraemos en minúsculas
+                            if (idGuardado.equals(idBuscarMin)) { // Comparamos con equals normal
                                 encontrado = inventario.get(i);
                                 break;
                             }
@@ -390,8 +397,10 @@ public class SuperMercado {
                     boolean encontradoParaBorrar = false;
 
                     // Buscamos de forma clásica en el ArrayList
+                    String idBorrarMin = idBorrar.toLowerCase(); // Lo estandarizamos antes del ciclo
                     for (int i = 0; i < inventario.size(); i++) {
-                        if (inventario.get(i).getId().equalsIgnoreCase(idBorrar)) {
+                        String idGuardado = inventario.get(i).getId().toLowerCase(); // Extraemos en minúsculas
+                        if (idGuardado.equals(idBorrarMin)) { // Comparamos con equals normal
 
                             // Guardamos el nombre antes de borrarlo para avisarle al usuario
                             String nombreEliminado = inventario.get(i).getNombre();
