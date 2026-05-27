@@ -81,10 +81,9 @@ public class SuperMercado {
                         System.out.println("\nQue tipo de producto es?");
                         System.out.println("1. Fritura");
                         System.out.println("2. Lacteo");
-                        System.out.println("3. Queso");
-                        System.out.println("4. Verduras");
-                        System.out.println("5. Cereal");         
-                        System.out.println("6. Carne Fria");     
+                        System.out.println("3. Verduras");
+                        System.out.println("4. Cereal");         
+                        System.out.println("5. Carne Fria");     
                         System.out.print("Seleccione una opcion: ");
                         int tipoProd = Integer.parseInt(scanner.nextLine());
 
@@ -101,37 +100,56 @@ public class SuperMercado {
                                 nuevoProducto = new Fritura(tipoF, sabor, gramos, precio, nombre, marca, "Frituras", id, stock, 0);
                                 break;
 
-                            case 2: // lacteo
-                                System.out.print("Ingrese tipo de leche: ");
-                                String tipoL = scanner.nextLine();
-                                System.out.print("Ingrese fecha de caducidad (AAAA-MM-DD): ");
-                                LocalDate fechaC = LocalDate.parse(scanner.nextLine()); // Requiere formato estricto: 2026-05-25
+                            
 
-                                nuevoProducto = new Lacteo(precio, nombre, marca, "Lacteos", id, stock, 0, tipoL, fechaC);
+                            case 2: // Sección de Lácteos
+                                System.out.print("Ingrese fecha de caducidad (AAAA-MM-DD): ");
+                                String fechaInput = scanner.nextLine().trim();
+                                LocalDate fechaC = LocalDate.parse(fechaInput);
+
+                                // SUBMENÚ INTERNO
+                                System.out.println("\n--- SUBCLASIFICACION DE LACTEO ---");
+                                System.out.println("1. Queso");
+                                System.out.println("2. Otro lacteo");
+                                System.out.print("Seleccione una opcion: ");
+                                int subTipoLacteo = Integer.parseInt(scanner.nextLine());
+
+                                switch (subTipoLacteo) {
+                                    case 1: // Queso (No pide tipo de leche)
+                                        System.out.println("\n--- DETALLES ESPECIFICOS DEL QUESO ---");
+                                        System.out.print("Ingrese tipo de Queso: ");
+                                        String tipoQ = scanner.nextLine().trim();
+                                        System.out.print("Ingrese peso en Kg: ");
+                                        double pesoQ = Double.parseDouble(scanner.nextLine());
+                                        System.out.print("¿Es importado? (true/false): ");
+                                        boolean esImportado = Boolean.parseBoolean(scanner.nextLine());
+
+                                        // LLAMAMOS AL NUEVO CONSTRUCTOR (Tiene 11 parametros, sin tipoL)
+                                        nuevoProducto = new Queso(precio, nombre, marca, "Lacteos", id, stock, 0, fechaC, tipoQ, pesoQ, esImportado);
+                                        break;
+
+                                    case 2: // Lácteo Base
+                                        System.out.print("Ingrese que tipo de lacteo es: ");
+                                        String tipoL = scanner.nextLine().trim();
+
+                                        // Instanciamos el Lacteo normal pasando el tipo que capturamos
+                                        nuevoProducto = new Lacteo(precio, nombre, marca, "Lacteos", id, stock, 0, tipoL, fechaC);
+                                        break;
+
+                                    default:
+                                        System.out.println("Opcion de subclasificacion invalida. Registro de lacteo cancelado.");
+                                        break;
+                                }
                                 break;
 
-                            case 3: // QUESO (Hereda de Lacteo)
-                                
-                                System.out.print("Ingrese fecha de caducidad (AAAA-MM-DD): ");
-                                LocalDate fechaCadQ = LocalDate.parse(scanner.nextLine());
-                                System.out.print("Ingrese tipo de Queso: ");
-                                String tipoQ = scanner.nextLine();
-                                System.out.print("Ingrese peso en Kg: ");
-                                double pesoQ = Double.parseDouble(scanner.nextLine());
-                                System.out.print("¿Es importado? (true/false): ");
-                                boolean esImportado = Boolean.parseBoolean(scanner.nextLine());
-
-                                nuevoProducto = new Queso(precio, nombre, marca, "Lacteos", id, stock, 0, fechaCadQ, tipoQ, pesoQ, esImportado);
-                                break;
-
-                            case 4: // VERDURAS
+                            case 3: // VERDURAS
                                 System.out.print("Ingrese el peso en Kg de la muestra/empaque: ");
                                 double pesoV = Double.parseDouble(scanner.nextLine());
 
                                 nuevoProducto = new Verduras(pesoV, precio, nombre, marca, "Verduras", id, stock, 0);
                                 break;
 
-                         case 5: // CEREAL
+                            case 4: // CEREAL
                                 System.out.print("Ingrese contenido neto en gramos: ");
                                
                                 double gramosCereal = Double.parseDouble(scanner.nextLine());
@@ -142,7 +160,7 @@ public class SuperMercado {
                                 nuevoProducto = new Cereal(precio, nombre, marca, "Cereales", id, stock, 0, gramosCereal, tipoCereal);
                                 break;
 
-                            case 6: // CARNE FRÍA
+                            case 5: // CARNE FRÍA
                                 System.out.print("Ingrese el peso en Kg: ");
                                 double pesoCarne = Double.parseDouble(scanner.nextLine());
                                 
