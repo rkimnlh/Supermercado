@@ -159,7 +159,7 @@ public class SuperMercado {
                                
                                 double gramosCereal = Double.parseDouble(scanner.nextLine());
                               
-                                System.out.print("Ingrese el tipo de cereal (ej. Avena, Trigo, Azucarado): ");
+                                System.out.print("Ingrese el tipo de cereal: ");
                                 String tipoCereal = scanner.nextLine().trim();
                                 
                                 nuevoProducto = new Cereal(precio, nombre, marca, "Cereales", id, stock, 0, gramosCereal, tipoCereal);
@@ -169,7 +169,7 @@ public class SuperMercado {
                                 System.out.print("Ingrese el peso en Kg: ");
                                 double pesoCarne = Double.parseDouble(scanner.nextLine());
                                 
-                                System.out.print("Ingrese el tipo de carne (ej. Cerdo, Pavo, Res): ");
+                                System.out.print("Ingrese el tipo de carne: ");
                                 String tipoCarne = scanner.nextLine().trim();
                                
                                 nuevoProducto = new CarneFria(precio, nombre, marca, "Carnes Frias", id, stock, 0, pesoCarne, tipoCarne);
