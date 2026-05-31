@@ -325,7 +325,10 @@ public class SuperMercado {
                                     if (cantidad <= 0) {
                                         System.out.println("La cantidad debe ser mayor a 0.");
                                     } else if (cantidad > encontrado.getStock()) {
-                                        System.out.println("No hay suficiente stock. Disponible: " + encontrado.getStock());
+                                        
+                                        // AQUÍ LANZAMOS LA EXCEPCIÓN EN LUGAR DE SOLO IMPRIMIR
+                                        throw new InsuficienteStockException("No hay suficiente stock. Disponible: " + encontrado.getStock());
+                                        
                                     } else {
                                         // Restamos el stock del inventario global
                                         encontrado.setStock(encontrado.getStock() - cantidad);
@@ -340,6 +343,10 @@ public class SuperMercado {
                                     }
                                 } catch (NumberFormatException e) {
                                     System.out.println("Error: Ingrese un dato numerico valido.");
+                                    
+                                // AQUÍ ATRAPAMOS LA EXCEPCIÓN PARA NO CRASHEAR
+                                } catch (InsuficienteStockException e) {
+                                    System.out.println("Error de Venta: " + e.getMessage());
                                 }
                             }
                         }
