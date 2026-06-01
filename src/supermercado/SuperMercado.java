@@ -243,11 +243,12 @@ public class SuperMercado {
                                 case 2: // DETALLES DE FRITURAS
                                 case 3: // DETALLES DE LÁCTEOS
                                 case 4: // DETALLES DE VERDURAS
-                                case 5: //cereales 
-                                case 6: //carne fria 
+                                case 5: // DETALLES DE CEREALES 
+                                case 6: // DETALLES DE CARNE FRIA 
                                     System.out.println("\n--- DETALLES DE CATEGORIA ---");
                                     boolean hayProductos = false;
                                 
+                                    // recorremos el inventario evaluando a qué clase hija pertenece cada objeto
                                     for (Producto p : inventario) {
                                         if (subOpcion == 2 && p instanceof Fritura) {
                                             System.out.println(p.toString());
@@ -258,15 +259,16 @@ public class SuperMercado {
                                         } else if (subOpcion == 4 && p instanceof Verduras) {
                                             System.out.println(p.toString());
                                             hayProductos = true;
-                                        } else if (subOpcion == 5 && p instanceof Cereal) {      // NUEVO
+                                        } else if (subOpcion == 5 && p instanceof Cereal) {    
                                             System.out.println(p.toString());
                                             hayProductos = true;
-                                        } else if (subOpcion == 6 && p instanceof CarneFria) {   // NUEVO
+                                        } else if (subOpcion == 6 && p instanceof CarneFria) {   
                                             System.out.println(p.toString());
                                             hayProductos = true;
                                         }
                                     }
 
+                                    // si terminó el ciclo y no entramos a ningun IF, mostramos que esa sección está vacía
                                     if (!hayProductos) {
                                         System.out.println("No hay productos registrados en esta categoria especifica.");
                                     }
@@ -289,73 +291,73 @@ public class SuperMercado {
                 case 3:
                     System.out.println("\n=== INICIAR NUEVA VENTA ===");
 
-                    // 1. Instanciamos un objeto de tu clase Caja para esta venta
+                    // se instancia un objeto de la clase Caja para la venta
                     Caja cajaActual = new Caja(); 
                     String continuarCaja = "s";
 
-                    // CICLO: Captura de productos y llenado del carrito de la Caja
+                    // ciclo para agregar multiples productos al carrito de la caja
                     do {
                         System.out.print("Ingrese el ID del producto que quiere vender: ");
                         String idBuscar = scanner.nextLine().trim();
                         Producto encontrado = null;
 
-                        // Buscamos el producto en el inventario global
-                        String idBuscarMin = idBuscar.toLowerCase(); // Lo estandarizamos antes del ciclo
+                        // buscamos el producto en el inventario
+                        String idBuscarMin = idBuscar.toLowerCase(); // lo estandarizamos a minusculas antes del ciclo
                         for (int i = 0; i < inventario.size(); i++) {
-                            String idGuardado = inventario.get(i).getId().toLowerCase(); // Extraemos en minúsculas
-                            if (idGuardado.equals(idBuscarMin)) { // Comparamos con equals normal
+                            String idGuardado = inventario.get(i).getId().toLowerCase(); // extraemos en minúsculas
+                            if (idGuardado.equals(idBuscarMin)) { // comparamos con equals
                                 encontrado = inventario.get(i);
-                                break;
+                                break; // cortamos el ciclo al encontrar la coincidencia exacta
                             }
                         }
 
                         if (encontrado == null) {
                             System.out.println("El producto no existe en el inventario.");
                         } else {
-                            // --- CANDADO DE CADUCIDAD ---
+                            // validacion de caducidad
                             boolean puedeVenderse = true;
                             
                             // Aplicamos polimorfismo para ver si el objeto tiene fecha de caducidad
                             if (encontrado instanceof Lacteo) {
                                 Lacteo productoLacteo = (Lacteo) encontrado;
                                 
-                                // Comparamos la fecha de caducidad contra el día de hoy
+                                // comparamos la fecha de caducidad con la fecha del día de hoy
                                 if (productoLacteo.getFechaCaducidad().isBefore(LocalDate.now())) {
                                     System.out.println("ALERTA DE SANIDAD: El producto '" + encontrado.getNombre() + 
                                                        "' caduco el " + productoLacteo.getFechaCaducidad() + " y NO puede ser vendido.");
-                                    puedeVenderse = false; // Bajamos la bandera para bloquear la venta
+                                    puedeVenderse = false; // bloqueamos el flujo de venta por seguridad
                                 }
                             }
 
-                            // Si el producto está en buen estado (o es una fritura/verdura)
+                            // si el producto está en buen estado (o es una fritura/verdura)procedemos a pedir la cantidad
                             if (puedeVenderse) {
                                 System.out.print("Ingrese la cantidad a vender: ");
                                 try {
                                     int cantidad = Integer.parseInt(scanner.nextLine());
-
+                                    
                                     if (cantidad <= 0) {
                                         System.out.println("La cantidad debe ser mayor a 0.");
                                     } else if (cantidad > encontrado.getStock()) {
                                         
-                                        // AQUÍ LANZAMOS LA EXCEPCIÓN EN LUGAR DE SOLO IMPRIMIR
+                                        // lanzamos la excepcion si no hay existencias suficientes en el inventario
                                         throw new InsuficienteStockException("No hay suficiente stock. Disponible: " + encontrado.getStock());
                                         
                                     } else {
-                                        // Restamos el stock del inventario global
+                                        // restamos el stock del inventario
                                         encontrado.setStock(encontrado.getStock() - cantidad);
 
-                                        // Asignamos la cantidad que compra este cliente
+                                        // asignamos la cantidad que compra este cliente
                                         encontrado.setCantidad(encontrado.getCantidad() + cantidad); 
 
-                                        // Agregamos el producto directamente al carrito de la caja
+                                        // agregamos el producto directamente al carrito de compra
                                         cajaActual.getCarrito().add(encontrado);
 
                                         System.out.println(encontrado.getNombre() + " agregado al carrito de la caja.");
                                     }
                                 } catch (NumberFormatException e) {
-                                    System.out.println("Error: Ingrese un dato numerico valido.");
+                                    System.out.println("Error: Ingrese un dato numerico valido."); 
                                     
-                                // AQUÍ ATRAPAMOS LA EXCEPCIÓN PARA NO CRASHEAR
+                                // atrapamos la excepcion de stock para evitar que se cierre el programa
                                 } catch (InsuficienteStockException e) {
                                     System.out.println("Error de Venta: " + e.getMessage());
                                 }
@@ -368,27 +370,27 @@ public class SuperMercado {
 
                     } while (continuarCaja.equals("s"));
 
-                    // PROCESAMIENTO DEL TICKET Y PERSISTENCIA
+                    // procesamiento del ticket
                     if (!cajaActual.getCarrito().isEmpty()) {
-                        // 3. ¡Polimorfismo y encapsulamiento! 
-                        // Usamos el toString() de tu clase Caja para imprimir todo el ticket formateado
+                        // aqui usamos polimorfismo y encapsulamiento 
+                        // imprimimos el ticket completo usando el metodo toString de la clase Caja
                         System.out.println(cajaActual.toString());
 
-                        // 4. Registramos de forma persistente las ventas en el historial global
+                        // registramos los movimientos en el historial global de ventas
                         for (int i = 0; i < cajaActual.getCarrito().size(); i++) {
                             Producto prodVendido = cajaActual.getCarrito().get(i);
                             int cant = prodVendido.getCantidad();
                             double importeProd = cant * prodVendido.calcularPrecioFinal();
 
-                            // Creamos el registro para tu archivo ventas.dat
+                            // creamos el objeto Venta para el registro
                             Venta registroVenta = new Venta(prodVendido.getNombre(), cant, importeProd);
                             ventas.add(registroVenta);
 
-                            // Limpiamos la cantidad asignada al producto para que quede listo en el inventario
+                            // limpiamos la cantidad asignada al producto para que quede listo en el inventario para futuras acciones
                             prodVendido.setCantidad(0);
                         }
 
-                        // 5. Guardado permanente de los archivos binarios actualizados
+                        // actualizamos ambos archivos binarios
                         ManejadorArchivos.guardarInventario(inventario);
                         ManejadorArchivos.guardarVentas(ventas);
                         System.out.println("-- Venta finalizada y base de datos guardada con exito. --");
@@ -399,10 +401,14 @@ public class SuperMercado {
 
                 case 4:
                     System.out.println("\n--- LISTA DE VENTAS DESDE ARCHIVO ---");
+                    
+                    // validacion de existencia de registros
                     if (ventas.isEmpty()) {
                         System.out.println("No se han hecho ventas aun.");
                     } else {
+                        // recorrido secuencial del ArrayList de ventas
                         for (int i = 0; i < ventas.size(); i++) {
+                            // llamamos al metodo sobreescrito toString de la clase Venta
                             System.out.println(ventas.get(i).toString());
                         }
                     }
@@ -412,28 +418,30 @@ public class SuperMercado {
                     System.out.print("Ingrese el ID del producto que desea borrar: ");
                     String idBorrar = scanner.nextLine().trim();
 
+                    // bandera logica para controlar el exito de la operacion de busqueda
                     boolean encontradoParaBorrar = false;
 
-                    // Buscamos de forma clásica en el ArrayList
-                    String idBorrarMin = idBorrar.toLowerCase(); // Lo estandarizamos antes del ciclo
+                    // buscamos en el ArrayList 
+                    String idBorrarMin = idBorrar.toLowerCase(); // lo estandarizamos antes del ciclo
                     for (int i = 0; i < inventario.size(); i++) {
-                        String idGuardado = inventario.get(i).getId().toLowerCase(); // Extraemos en minúsculas
-                        if (idGuardado.equals(idBorrarMin)) { // Comparamos con equals normal
-
-                            // Guardamos el nombre antes de borrarlo para avisarle al usuario
+                        String idGuardado = inventario.get(i).getId().toLowerCase(); // extraemos en minúsculas
+                        if (idGuardado.equals(idBorrarMin)) { // comparamos con equals 
+                            
+                            // guardamos el nombre antes de borrarlo para avisarle al usuario
                             String nombreEliminado = inventario.get(i).getNombre();
 
-                            // 1. Lo removemos del ArrayList en memoria RAM
+                            // lo removemos del ArrayList en memoria RAM
                             inventario.remove(i); 
 
-                            // 2. Sobrescribimos el archivo binario para actualizar el disco duro
+                            // sobrescribimos el archivo binario para actualizar el disco duro
                             ManejadorArchivos.guardarInventario(inventario); 
 
                             System.out.println("¡Exito! El producto '" + nombreEliminado + "' con ID [" + idBorrar + "] fue eliminado.");
                             encontradoParaBorrar = true;
-                             // Salimos del ciclo porque los IDs son únicos
+                             // salimos del ciclo porque los IDs son únicos
                         }
                     }
+                    // control en caso de que el id no coincida con ningun registro en el archivo binario
                     if (!encontradoParaBorrar) 
                         System.out.println("No se encontro ningun producto con el ID [" + idBorrar + "].");
                     break;
@@ -441,10 +449,12 @@ public class SuperMercado {
                     System.out.println("Saliendo del programa persistente...");
                     break;
 
+                // manejo para entradas fuera del rango del menu de opciones
                 default:
                     System.out.println("Opcion invalida.");
                 }
             
+            // condicion para cerrar el ciclo principal del menu
             } while (opcion != 6);
         }
 }
