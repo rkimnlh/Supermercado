@@ -113,11 +113,14 @@ public class SuperMercado {
                             
 
                             case 2://lacteos 
+                                // pedimos la fecha indicando el formato exacto
                                 System.out.print("Ingrese fecha de caducidad (AAAA-MM-DD): ");
+                                // leemos la fecha como texto (String) y le quitamos los espacios basura con trim()
                                 String fechaInput = scanner.nextLine().trim();
+                                // usamos LocalDate.parse() para convertir ese texto en formato date
                                 LocalDate fechaC = LocalDate.parse(fechaInput);
 
-                                // SUBMENÚ INTERNO
+                                //submenu interno para separar lacteos generales de queso
                                 System.out.println("\n--- SUBCLASIFICACION DE LACTEO ---");
                                 System.out.println("1. Queso");
                                 System.out.println("2. Otro lacteo");
@@ -152,31 +155,31 @@ public class SuperMercado {
                                 }
                                 break;
 
-                            case 3: // VERDURAS
+                            case 3: // verduras
                                 System.out.print("Ingrese el peso en Kg de la muestra/empaque: ");
                                 double pesoV = Double.parseDouble(scanner.nextLine());
-
+                                //instanciamos 
                                 nuevoProducto = new Verduras(pesoV, precio, nombre, marca, "Verduras", id, stock, 0);
                                 break;
 
-                            case 4: // CEREAL
+                            case 4: //cereal
                                 System.out.print("Ingrese contenido neto en gramos: ");
                                
                                 double gramosCereal = Double.parseDouble(scanner.nextLine());
                               
                                 System.out.print("Ingrese el tipo de cereal: ");
                                 String tipoCereal = scanner.nextLine().trim();
-                                
+                                //instanciamos 
                                 nuevoProducto = new Cereal(precio, nombre, marca, "Cereales", id, stock, 0, gramosCereal, tipoCereal);
                                 break;
 
-                            case 5: // CARNE FRÍA
+                            case 5: //carne frias 
                                 System.out.print("Ingrese el peso en Kg: ");
                                 double pesoCarne = Double.parseDouble(scanner.nextLine());
                                 
                                 System.out.print("Ingrese el tipo de carne: ");
                                 String tipoCarne = scanner.nextLine().trim();
-                               
+                               //instanciamos 
                                 nuevoProducto = new CarneFria(precio, nombre, marca, "Carnes Frias", id, stock, 0, pesoCarne, tipoCarne);
                                 break;
 
@@ -185,13 +188,14 @@ public class SuperMercado {
                                 break;
                         }
 
-                        // Si se logro instanciar algun objeto del submenú, lo guardamos
+                        // si se logro instanciar algun objeto del submenú, lo guardamos
                         if (nuevoProducto != null) {
-                            inventario.add(nuevoProducto); // Agregamos al ArrayList polimorfico
-                            ManejadorArchivos.guardarInventario(inventario); // Guardamos permanentemente en el archivo .dat
+                            inventario.add(nuevoProducto); // agregamos al ArrayList
+                            ManejadorArchivos.guardarInventario(inventario); // guardamos permanentemente en el archivo .dat
+                            // getSimpleName() obtiene el nombre de la clase hija para imprimirlo
                             System.out.println( nuevoProducto.getClass().getSimpleName() + " guardado con exito en el inventario");
                         }
-
+                        // cachamos cualquiera de nuestras excepciones
                         } catch (IdInvalidaException | PrecioInvalidoException | StockInvalidoException e) {
                             System.out.println("Validacion: " + e.getMessage());
                         } catch (NumberFormatException e) {
@@ -203,6 +207,7 @@ public class SuperMercado {
                 case 2:
                     int subOpcion = 0;
                     do {
+                        //creamos un submenu para poder visulaizar el inventario de manera más ordenada 
                        System.out.println("\n=== VISUALIZAR INVENTARIO ===");
                         System.out.println("1. Inventario general");
                         System.out.println("2. Ver detalles de frituras");
@@ -214,7 +219,8 @@ public class SuperMercado {
                         System.out.print("Seleccione una opcion: ");
                         try {
                             subOpcion = Integer.parseInt(scanner.nextLine());
-
+                            
+                            //revisa que la lista tenga productos y que la opcion sea diferente a la salida 
                             if (inventario.isEmpty() && subOpcion != 7) {
                                 System.out.println("El inventario esta completamente vacio.");
                                 continue;
@@ -222,7 +228,7 @@ public class SuperMercado {
 
                             switch (subOpcion) {
                                 case 1:
-                                    // LA TABLA GENERAL QUE YA TENÍAN
+                                    // definimos una estructura para la tabla general
                                     System.out.println("\n---------------------------------------------------------");
                                     System.out.printf("%-6s | %-18s | %-6s | %-12s\n", "ID", "NOMBRE", "STOCK", "PRECIO BASE");
                                     System.out.println("---------------------------------------------------------");
