@@ -10,11 +10,11 @@ public class Queso extends Lacteo {
     public Queso () {
     }
 
-    // CONSTRUCTOR ESPECIAL: Sin tipo de leche en los parametros
+    // Constructor especial sin tipo de leche en los parametros
     public Queso(double precioBase, String nombre, String marca, String categoria, String id, int stock,
                  int cantidad, LocalDate fechaCaducidad, String tipoQueso, double pesoKg, boolean esImportado) {
         
-        // Le pasamos "No especificado" al constructor de Lacteo para que no truene ni quede en null
+        // colocamos "No especificado" al constructor de Lacteo para que no truene ni quede en null
         super(precioBase, nombre, marca, categoria, id, stock, cantidad, "No especificado", fechaCaducidad);
         
         this.tipoQueso = tipoQueso;
