@@ -1,4 +1,5 @@
 package supermercado;
+//@author starmoon 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -6,8 +7,7 @@ import java.util.Scanner;
 public class SuperMercado {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        
-        // Cargamos las listas desde los archivos binarios al arrancar
+        // cargamos las listas desde los archivos binarios al arrancar
         ArrayList<Producto> inventario = ManejadorArchivos.cargarInventario();
         ArrayList<Venta> ventas = ManejadorArchivos.cargarVentas();
         
@@ -25,11 +25,12 @@ public class SuperMercado {
             System.out.print("Seleccione una opcion: ");
             
             try {
+                // leemos todo como texto y lo convertimos a int 
                 opcion = Integer.parseInt(scanner.nextLine());
-            } catch (NumberFormatException e) {
+            } catch (NumberFormatException e) { //atrapamos la excepcion por si se ingreso algo diferente a un numero 
                 System.out.println("Error: Debe ingresar un numero entero.");
                 opcion = 0;
-                continue;
+                continue;// reinicia el ciclo para volver a mostrar el menu
             }
 
             switch (opcion) {
@@ -37,35 +38,33 @@ public class SuperMercado {
                     try {
                         System.out.println("\n=== REGISTRAR NUEVO PRODUCTO ===");
                         System.out.print("Ingrese ID (Clave alfanumerica): ");
-                        String id = scanner.nextLine().trim();
+                        String id = scanner.nextLine().trim();//utilizamo .trim para eliminar espacios 
 
-                        // 1. Validación de formato básica de tu validador
+                        //utilizamos el metodo de nuestra clase validador para validar el id 
                         ManejadorArchivos.Validador.validarClave(id);
 
-                        // 2. CANDADO: Validar que el ID no esté repetido en el inventario actual
+                        //validar que el id no se repita 
                         boolean idExiste = false;
-                        // Pasamos a minúsculas el ID que el usuario acaba de teclear
+                        // pasamos todo a minusculas para que A12 y a12 cuenten como el mismo ID
                         String idNuevo = id.toLowerCase();
                         for (int i = 0; i < inventario.size(); i++) {
-                            // Extraemos el ID del producto en esta posición del inventario y lo pasamos a minúsculas
+                            // extraemos el ID del producto en esta posición del inventario y lo pasamos a minúsculas
                             String idGuardado = inventario.get(i).getId().toLowerCase();
-                            // Ahora comparamos ambos textos en minúsculas usando el equals normal
+                            // ahora comparamos ambos textos en minúsculas usando el equals normal
                             if (idGuardado.equals(idNuevo)) {
                                 idExiste = true;
-                                break; // Ya encontramos que existe, no tiene caso seguir buscando
+                                break; // ya encontramos que existe, no tiene caso seguir buscando
                             }
                         }
 
-                        // Si el ID ya existe, lanzamos la excepción para interrumpir el flujo
+                        // si el ID ya existe, lanzamos la excepción para interrumpir el flujo
                         if (idExiste) {
                             throw new IdInvalidaException("El ID [" + id + "] ya esta registrado con otro producto.");
                         }
         
-                        // ------------------------------------------------------------------
-                        // Si el programa llega aquí, significa que el ID es único y legal.
-                        // Continúa el flujo normal de captura de datos...
-                        // ------------------------------------------------------------------
-
+                        // si llegamos hasta aqui, el ID es valido y unico
+                        
+                        //registramos los datos del producto 
                         System.out.print("Ingrese nombre del producto: ");
                         String nombre = scanner.nextLine().trim();
                         if (nombre.length() < 3) {
@@ -83,6 +82,7 @@ public class SuperMercado {
                         int stock = Integer.parseInt(scanner.nextLine());
                         ManejadorArchivos.Validador.validarStockInicial(stock);
                         
+                        //mostramos un menú para poder registrar el producto de acuerdo a su categoría 
                         System.out.println("\nQue tipo de producto es?");
                         System.out.println("1. Fritura");
                         System.out.println("2. Lacteo");
@@ -90,24 +90,29 @@ public class SuperMercado {
                         System.out.println("4. Cereal");         
                         System.out.println("5. Carne Fria");     
                         System.out.print("Seleccione una opcion: ");
+                        
+                        // leemos que categoria de producto quiere registrar
                         int tipoProd = Integer.parseInt(scanner.nextLine());
-
+                        // creamos una variable vacia usando la clase padre Producto tiene la capacidad de guardar cualquiera de sus clases hijas  mas adelante en el switch.
                         Producto nuevoProducto = null; 
                        
                         switch (tipoProd) {
                             case 1: //fritura
+                                //leemos los atributsos especificos de la clase 
                                 System.out.print("Ingrese tipo de fritura: ");
                                 String tipoF = scanner.nextLine();
                                 System.out.print("Ingrese sabor: ");
                                 String sabor = scanner.nextLine();
                                 System.out.print("Ingrese contenido en gramos: ");
                                 double gramos = Double.parseDouble(scanner.nextLine());
+                                
+                                //instanciamos la clase hija 
                                 nuevoProducto = new Fritura(tipoF, sabor, gramos, precio, nombre, marca, "Frituras", id, stock, 0);
                                 break;
 
                             
 
-                            case 2: // Sección de Lácteos
+                            case 2://lacteos 
                                 System.out.print("Ingrese fecha de caducidad (AAAA-MM-DD): ");
                                 String fechaInput = scanner.nextLine().trim();
                                 LocalDate fechaC = LocalDate.parse(fechaInput);

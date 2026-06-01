@@ -1,5 +1,5 @@
 package supermercado;
-
+//@author starmoon 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -10,57 +10,56 @@ import java.util.ArrayList;
 
 public class ManejadorArchivos {
 
-    // MÉTODO 1: GUARDAR EL INVENTARIO (ESCRITURA)
+    // metodo para guardar el inventario en el archivo fisico
     public static void guardarInventario(ArrayList<Producto> lista) {
-        // Todo se declara dentro de los paréntesis del try (try-with-resources)
+        // usamos try-with-resources para que el archivo no se quede abierto y no tengamos fugas de memoria o que marque error de acceso despues
         try (FileOutputStream canalArchivo = new FileOutputStream("./src/supermercado/archivoInventario.str");
              ObjectOutputStream escribidorObjetos = new ObjectOutputStream(canalArchivo)) {
              
-            // Escribimos toda la lista de productos de un solo golpe en el archivo
+            // mandamos toda la lista completa al archivo de un solo golpe
             escribidorObjetos.writeObject(lista);
             System.out.println("-- Inventario actualizado --");
             
         } catch (IOException e) {
-            // Si ocurre un error de lectura/escritura, lo atrapamos aquí
+            //si ocurre algun error, atrapamos la excepcion 
             System.out.println("Error al intentar guardar el inventario: " + e.getMessage());
         }
-        // Ya no hay finally. Java cierra el archivo automáticamente aquí.
     }
 
-    // MÉTODO 2: LECTURA DEL INVENTARIO (CARGAR AL INICIAR)
+    // cargar el inventario al arrancar el sistema
     public static ArrayList<Producto> cargarInventario() {
-        // Validamos si el archivo físico ya existe en la computadora
+        //revisamos si el archivo existe 
         File archivoFisico = new File("./src/supermercado/archivoInventario.str");
         if (!archivoFisico.exists()) {
-            // Si el archivo no existe regresamos una lista vacía
+            // si es la primera vez que lo corremos, regresamos lista vacia
             return new ArrayList<Producto>();
         }
 
-        // try-with-resources para la lectura
+        // abrimos los canales de lectura en el try 
         try (FileInputStream canalArchivo = new FileInputStream("./src/supermercado/archivoInventario.str");
              ObjectInputStream lectorObjetos = new ObjectInputStream(canalArchivo)) {
              
-            // Leemos el objeto del archivo y lo transformamos (cast) a un ArrayList
+            //leemos la lista de productos 
             return (ArrayList<Producto>) lectorObjetos.readObject();
             
         } catch (IOException e) {
             System.out.println("Error de lectura al cargar inventario: " + e.getMessage());
             return new ArrayList<Producto>(); 
         } catch (ClassNotFoundException e) {
-            System.out.println("Error de conversión de datos: " + e.getMessage());
+            System.out.println("Error de conversion de datos: " + e.getMessage());
             return new ArrayList<Producto>();
         }
     }
 
     private static final String ARCHIVO_VENTAS = "ventas.dat";
 
-    // MÉTODO 3: GUARDAR HISTORIAL DE VENTAS
+    //guardamos las ventas 
     public static void guardarVentas(ArrayList<Venta> listaVentas) {
-        // try-with-resources para la escritura
+        // try-with-resources para escribir 
         try (FileOutputStream canalArchivo = new FileOutputStream(ARCHIVO_VENTAS);
              ObjectOutputStream escribidorObjetos = new ObjectOutputStream(canalArchivo)) {
-             
-            // Guardamos la lista de ventas
+    
+            // sobrescribimos con la lista nueva actualizada
             escribidorObjetos.writeObject(listaVentas);
             
         } catch (IOException e) {
@@ -68,14 +67,14 @@ public class ManejadorArchivos {
         }
     }
 
-    // MÉTODO 4: CARGAR HISTORIAL DE VENTAS
+    //recuperar las ventas
     public static ArrayList<Venta> cargarVentas() {
         File archivoFisico = new File(ARCHIVO_VENTAS);
         if (!archivoFisico.exists()) {
-            return new ArrayList<Venta>(); 
+            return new ArrayList<Venta>(); // por si todavia no hay ventas registradas
         }
 
-        // try-with-resources para la lectura
+        // leemos el archivo de ventas
         try (FileInputStream canalArchivo = new FileInputStream(ARCHIVO_VENTAS);
              ObjectInputStream lectorObjetos = new ObjectInputStream(canalArchivo)) {
              
@@ -85,27 +84,28 @@ public class ManejadorArchivos {
             System.out.println("Error al cargar las ventas: " + e.getMessage());
             return new ArrayList<Venta>();
         } catch (ClassNotFoundException e) {
-            System.out.println("Error de conversión en ventas: " + e.getMessage());
+            System.out.println("Error de conversion en ventas: " + e.getMessage());
             return new ArrayList<Venta>();
         }
     }
 
+    // clase validador para atrapar los errores del usuario al registrar
     public static class Validador {
-        // Si la clave está mal, avisa que hay un error (throws)
+        // lanza el error si la clave viene vacia o menor a 3 digitos 
         public static void validarClave(String clave) throws IdInvalidaException {
-            if (clave == null || clave.trim().isEmpty() || clave.trim().length() < 3) {
-                throw new IdInvalidaException("La clave debe tener al menos 3 caracteres alfanuméricos.");
+            if (clave == null || clave.trim().isEmpty() || clave.trim().length() < 3) {//usamos .trim para eliminar cualquier espacio
+                throw new IdInvalidaException("La clave debe tener al menos 3 caracteres alfanumericos.");
             }
         }
 
-        // Si el precio es menor o igual a cero, lanza error
+        // lanza el error si quiere registrar un precio en cero o negativo
         public static void validarPrecio(double precio) throws PrecioInvalidoException {
             if (precio <= 0) {
-                throw new PrecioInvalidoException("El precio debe ser un número positivo mayor a 0.");
+                throw new PrecioInvalidoException("El precio debe ser un numero positivo mayor a 0.");
             }
         }
 
-        // Si el inventario inicial es menor a cero (negativo), lanza error
+        // lanza error si quiere registrar un inventario en numeros negativos
         public static void validarStockInicial(int stock) throws StockInvalidoException {
             if (stock < 0) {
                 throw new StockInvalidoException("El inventario inicial no puede ser negativo.");

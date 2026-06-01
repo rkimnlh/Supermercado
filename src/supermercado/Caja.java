@@ -1,6 +1,7 @@
 package supermercado;
+//@author starmoon 
 import java.util.ArrayList;
-
+//Constructores
 public class Caja {
     protected ArrayList<Producto> carrito;
     protected double subtotal;
@@ -18,20 +19,20 @@ public class Caja {
         this.iva = iva;
         this.total = total;
     }
-
+    //metodo para agregar productos al carrito 
     public void agregarProducto(Producto p) {
         this.carrito.add(p);
     }
-
+    //getter
     public ArrayList<Producto> getCarrito() {
         return this.carrito;
     }
-    
+    //metodo para obtener productos del array y calcular precios
     private String obtenerListaYCalcular() {
         String acumulador = ""; 
         this.subtotal = 0.0; 
 
-        for (Producto item : carrito) {
+        for (Producto item : carrito) {//recorremos la lista de productos con un for each 
             String mensajePromo = "";
             try {
                 Mensaje promo = (Mensaje) item;//tratamos el obejto item como si fuera de tipo Mensaje y no Producto
@@ -39,10 +40,11 @@ public class Caja {
             } catch (ClassCastException e) {
                 //si la interfaz no se implementa en la clase el casting falla, pero con el catch lo ignoramos y continua la ejecucion 
             }
-            double precioFinal = item.calcularPrecioFinal();
-            double totalItem = item.getCantidad() * precioFinal;
-            this.subtotal += totalItem;
-            // Agregamos el mensaje al acumulador
+            //calculamos el precio final
+            double precioFinal = item.calcularPrecioFinal();//calculamos precio final por producto individual 
+            double totalItem = item.getCantidad() * precioFinal;//calculamos el precio total por producto 
+            this.subtotal += totalItem;//vamos sumando los totales al subtotal general
+            // agregamos el mensaje al acumulador
             acumulador += String.format("%-6d %-15.15S %-10.2f %-10.2f\n",
                     item.getCantidad(), item.getNombre(), precioFinal, totalItem);
 
@@ -52,13 +54,14 @@ public class Caja {
         }
          
         this.iva = this.subtotal * 0.16;
-        this.total = this.subtotal + this.iva;
+        this.total = this.subtotal + this.iva;//agregamos el iva 
 
-        return acumulador;
+        return acumulador;//retornamos la lista para poder imprimir en el ticket 
     }
     
     @Override
     public String toString() {
+        //imprimimos el ticket 
         String listaProductos = obtenerListaYCalcular();
         return String.format("""
             ============================================
